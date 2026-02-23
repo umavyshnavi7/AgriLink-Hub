@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Initiatives - AgriLink Hub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .initiative-card { background: white; padding: 2rem; border-radius: 20px; margin: 1.5rem 0; box-shadow: 0 8px 20px rgba(0,20,0,0.1); }
+    .initiative-header { display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem; }
+    .initiative-title { font-size: 1.5rem; color: #1f4f2b; font-weight: 700; }
+    .status-badge { background: #e8f5e9; color: #2e7d32; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600; }
+    .crop-recommendation { background: linear-gradient(135deg, #e4f2da 0%, #d4e8c4 100%); padding: 2rem; border-radius: 20px; margin: 2rem 0; }
+    .season-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 1.5rem 0; }
+    .season-card { background: white; padding: 1.5rem; border-radius: 15px; border-left: 4px solid #4c7a4c; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo"><i class="fas fa-seedling"></i><span>AgriLink Hub</span></div>
+      <div class="nav-links">
+        <a href="far.html">Home</a>
+        <a href="initiatives.html">Initiatives</a>
+        <a href="far.html" class="btn">Back</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="margin-top: 2rem;">
+    <div class="welcome">
+      <h1>📅 Farming Initiatives & Crop Guidance</h1>
+      <p>Government schemes, seasonal crop recommendations, and funding opportunities</p>
+    </div>
+
+    <!-- Crop Recommendations Section -->
+    <div class="crop-recommendation">
+      <h2 style="color: #1f4f2b; margin-bottom: 1.5rem;"><i class="fas fa-seedling"></i> Seasonal Crop Recommendations</h2>
+      <p style="margin-bottom: 1.5rem;">Based on current season, soil type, and market demand</p>
+      
+      <div class="season-grid">
+        <div class="season-card">
+          <h3 style="color: #1f4f2b; margin-bottom: 1rem;">🌾 Kharif Season (June-Oct)</h3>
+          <p><strong>Recommended Crops:</strong></p>
+          <p>• Rice (Paddy) - High demand<br>
+          • Maize - Good market price<br>
+          • Cotton - Export potential<br>
+          • Jowar - Drought resistant<br>
+          • Bajra - Low water requirement</p>
+          <p style="margin-top: 1rem; color: #2b7a2b;"><strong>Best for:</strong> Monsoon regions, irrigated land</p>
+        </div>
+
+        <div class="season-card">
+          <h3 style="color: #1f4f2b; margin-bottom: 1rem;">🌻 Rabi Season (Nov-Mar)</h3>
+          <p><strong>Recommended Crops:</strong></p>
+          <p>• Wheat - Stable market<br>
+          • Mustard - Oil seed demand<br>
+          • Chickpea - Protein crop<br>
+          • Potato - High returns<br>
+          • Onion - Year-round demand</p>
+          <p style="margin-top: 1rem; color: #2b7a2b;"><strong>Best for:</strong> Winter crops, cool climate</p>
+        </div>
+
+        <div class="season-card">
+          <h3 style="color: #1f4f2b; margin-bottom: 1rem;">☀️ Zaid Season (Mar-June)</h3>
+          <p><strong>Recommended Crops:</strong></p>
+          <p>• Watermelon - Summer fruit<br>
+          • Cucumber - Quick harvest<br>
+          • Muskmelon - High profit<br>
+          • Tomato - Vegetable demand<br>
+          • Green vegetables - Fast growing</p>
+          <p style="margin-top: 1rem; color: #2b7a2b;"><strong>Best for:</strong> Summer crops, irrigated areas</p>
+        </div>
+      </div>
+
+      <div style="background: white; padding: 1.5rem; border-radius: 15px; margin-top: 1.5rem;">
+        <h4 style="color: #1f4f2b; margin-bottom: 1rem;">💡 Smart Crop Selection Tips:</h4>
+        <p>✓ Check soil pH and nutrient levels before planting<br>
+        ✓ Consider water availability in your region<br>
+        ✓ Research current market prices and demand<br>
+        ✓ Rotate crops to maintain soil health<br>
+        ✓ Choose disease-resistant varieties</p>
+      </div>
+    </div>
+
+    <!-- Government Schemes -->
+    <h2 style="color: #1f4f2b; margin: 2rem 0 1rem;">🏛️ Government Schemes & Initiatives</h2>
+
+    <div class="initiative-card">
+      <div class="initiative-header">
+        <div class="initiative-title">PM-KISAN (Pradhan Mantri Kisan Samman Nidhi)</div>
+        <span class="status-badge">Active</span>
+      </div>
+      <p><strong>Benefit:</strong> ₹6,000 per year in 3 installments<br>
+      <strong>Eligibility:</strong> All landholding farmers<br>
+      <strong>How to Apply:</strong> Online through PM-KISAN portal or nearest CSC</p>
+      <button class="btn" style="margin-top: 1rem;">Apply Now</button>
+    </div>
+
+    <div class="initiative-card">
+      <div class="initiative-header">
+        <div class="initiative-title">Pradhan Mantri Fasal Bima Yojana (PMFBY)</div>
+        <span class="status-badge">Active</span>
+      </div>
+      <p><strong>Benefit:</strong> Crop insurance against natural calamities<br>
+      <strong>Premium:</strong> 2% for Kharif, 1.5% for Rabi crops<br>
+      <strong>Coverage:</strong> Full sum insured for crop loss</p>
+      <button class="btn" style="margin-top: 1rem;">Get Insurance</button>
+    </div>
+
+    <div class="initiative-card">
+      <div class="initiative-header">
+        <div class="initiative-title">Kisan Credit Card (KCC)</div>
+        <span class="status-badge">Active</span>
+      </div>
+      <p><strong>Benefit:</strong> Easy credit up to ₹3 lakh at 4% interest<br>
+      <strong>Purpose:</strong> Seeds, fertilizers, equipment purchase<br>
+      <strong>Repayment:</strong> Flexible terms based on harvest</p>
+      <button class="btn" style="margin-top: 1rem;">Apply for KCC</button>
+    </div>
+
+    <div class="initiative-card">
+      <div class="initiative-header">
+        <div class="initiative-title">Soil Health Card Scheme</div>
+        <span class="status-badge">Active</span>
+      </div>
+      <p><strong>Benefit:</strong> Free soil testing and nutrient recommendations<br>
+      <strong>Frequency:</strong> Every 3 years<br>
+      <strong>Advantage:</strong> Optimize fertilizer use, reduce costs</p>
+      <button class="btn" style="margin-top: 1rem;">Request Soil Test</button>
+    </div>
+
+    <div class="initiative-card">
+      <div class="initiative-header">
+        <div class="initiative-title">Pradhan Mantri Krishi Sinchayee Yojana (PMKSY)</div>
+        <span class="status-badge">Active</span>
+      </div>
+      <p><strong>Benefit:</strong> Subsidy on drip/sprinkler irrigation (up to 90%)<br>
+      <strong>Purpose:</strong> Water conservation and efficient irrigation<br>
+      <strong>Coverage:</strong> All categories of farmers</p>
+      <button class="btn" style="margin-top: 1rem;">Apply for Subsidy</button>
+    </div>
+
+    <div class="initiative-card">
+      <div class="initiative-header">
+        <div class="initiative-title">National Mission for Sustainable Agriculture</div>
+        <span class="status-badge">Active</span>
+      </div>
+      <p><strong>Benefit:</strong> Training, equipment subsidy, organic farming support<br>
+      <strong>Focus:</strong> Climate-resilient agriculture<br>
+      <strong>Support:</strong> Technical guidance and financial assistance</p>
+      <button class="btn" style="margin-top: 1rem;">Learn More</button>
+    </div>
+
+    <!-- Upcoming Workshops -->
+    <h2 style="color: #1f4f2b; margin: 2rem 0 1rem;">📚 Upcoming Workshops & Training</h2>
+
+    <div class="initiative-card">
+      <div class="initiative-header">
+        <div class="initiative-title">Organic Farming Workshop</div>
+        <span class="status-badge">Registration Open</span>
+      </div>
+      <p><strong>Date:</strong> March 15-17, 2025<br>
+      <strong>Venue:</strong> District Agriculture Office<br>
+      <strong>Topics:</strong> Composting, natural pest control, certification process<br>
+      <strong>Fee:</strong> Free for registered farmers</p>
+      <button class="btn" style="margin-top: 1rem;">Register Now</button>
+    </div>
+
+    <div class="initiative-card">
+      <div class="initiative-header">
+        <div class="initiative-title">Modern Irrigation Techniques</div>
+        <span class="status-badge">Registration Open</span>
+      </div>
+      <p><strong>Date:</strong> March 20, 2025<br>
+      <strong>Venue:</strong> Krishi Vigyan Kendra<br>
+      <strong>Topics:</strong> Drip irrigation, water management, subsidy schemes<br>
+      <strong>Fee:</strong> Free</p>
+      <button class="btn" style="margin-top: 1rem;">Register Now</button>
+    </div>
+  </div>
+
+  <script src="auth-check.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

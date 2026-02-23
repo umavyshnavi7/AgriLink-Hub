@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expert Dashboard - AgriLink Hub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #fefef7 0%, #f5f9f0 100%); color: #2e3b2e; position: relative; }
+    body::before { content: '🌻'; position: fixed; font-size: 6rem; opacity: 0.08; top: 15%; right: 5%; animation: rotate 20s linear infinite; z-index: 0; }
+    @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .navbar { background: #1f4f2b; color: white; padding: 1rem 0; box-shadow: 0 4px 12px rgba(0,40,0,0.1); }
+    .navbar .container { max-width: 1280px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+    .logo { display: flex; align-items: center; gap: 0.5rem; font-size: 1.7rem; font-weight: 700; font-family: 'Merriweather', serif; }
+    .logo i { color: #f5e7c8; font-size: 2rem; }
+    .user-info { display: flex; align-items: center; gap: 1rem; }
+    .user-info span { color: #f0f7e6; }
+    .btn { background: #e9b741; color: #1f4f2b; padding: 0.6rem 1.4rem; border-radius: 40px; text-decoration: none; font-weight: 600; border: none; cursor: pointer; }
+    .container { max-width: 1280px; margin: 2rem auto; padding: 0 2rem; }
+    .welcome { background: linear-gradient(115deg, #e2f0da 0%, #c8e0c0 100%); padding: 2rem; border-radius: 30px; margin-bottom: 2rem; position: relative; overflow: hidden; }
+    .welcome::after { content: '🌹'; position: absolute; top: 10px; right: 20px; font-size: 3rem; opacity: 0.2; }
+    .welcome h1 { font-family: 'Merriweather', serif; color: #1d3e1d; margin-bottom: 0.5rem; }
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 2rem 0; }
+    .stat-box { background: #f9f7eb; padding: 1.5rem; border-radius: 20px; text-align: center; }
+    .stat-box h2 { color: #1f4f2b; font-size: 2rem; }
+    .stat-box p { color: #3f5a3f; font-size: 0.9rem; }
+    .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin: 2rem 0; }
+    .card { background: white; padding: 2rem; border-radius: 24px; box-shadow: 0 10px 25px -8px rgba(0,40,0,0.1); border-left: 6px solid #8B5A2B; position: relative; transition: all 0.3s; }
+    .card::before { content: '🌷'; position: absolute; bottom: 10px; right: 10px; font-size: 2rem; opacity: 0.1; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px -10px rgba(0,40,0,0.2); }
+    .card h3 { font-family: 'Merriweather', serif; color: #1d4b1d; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .card i { font-size: 1.8rem; color: #1f4f2b; }
+    .card p { color: #3f5a3f; margin-bottom: 1rem; }
+    .card-btn { background: #e9b741; color: #1f4f2b; padding: 0.5rem 1.2rem; border-radius: 20px; text-decoration: none; display: inline-block; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo"><i class="fas fa-seedling"></i><span>AgriLink Hub</span></div>
+      <div class="user-info">
+        <span><i class="fas fa-flask"></i> Expert Dashboard</span>
+        <a href="far.html" class="btn">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="welcome">
+      <h1>🔬 Agricultural Expert Dashboard</h1>
+      <p>Provide guidance, create educational content, and support farmers' needs.</p>
+    </div>
+
+    <div class="stats">
+      <div class="stat-box">
+        <h2>87</h2>
+        <p>Questions Answered</p>
+      </div>
+      <div class="stat-box">
+        <h2>23</h2>
+        <p>Content Created</p>
+      </div>
+      <div class="stat-box">
+        <h2>1.2k</h2>
+        <p>Farmers Helped</p>
+      </div>
+      <div class="stat-box">
+        <h2>4.8★</h2>
+        <p>Rating</p>
+      </div>
+    </div>
+
+    <div class="dashboard-grid">
+      <div class="card">
+        <h3><i class="fas fa-question-circle"></i> Answer Questions</h3>
+        <p>Respond to farmer queries and provide expert guidance.</p>
+        <a href="#" class="card-btn">View Questions</a>
+      </div>
+
+      <div class="card">
+        <h3><i class="fas fa-pen"></i> Create Content</h3>
+        <p>Write articles, guides, and educational resources.</p>
+        <a href="#" class="card-btn">Create Resource</a>
+      </div>
+
+      <div class="card">
+        <h3><i class="fas fa-video"></i> Host Webinars</h3>
+        <p>Schedule and conduct live training sessions.</p>
+        <a href="#" class="card-btn">Schedule Webinar</a>
+      </div>
+
+      <div class="card">
+        <h3><i class="fas fa-calendar-alt"></i> Consultations</h3>
+        <p>Manage one-on-one farmer consultation bookings.</p>
+        <a href="#" class="card-btn">View Schedule</a>
+      </div>
+
+      <div class="card">
+        <h3><i class="fas fa-users"></i> My Community</h3>
+        <p>Connect with farmers following your guidance.</p>
+        <a href="#" class="card-btn">View Community</a>
+      </div>
+
+      <div class="card">
+        <h3><i class="fas fa-chart-line"></i> Impact Analytics</h3>
+        <p>Track your reach and farmer success stories.</p>
+        <a href="#" class="card-btn">View Impact</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

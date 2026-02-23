@@ -1,0 +1,473 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #fefef7;
+  color: #2e3b2e;
+  line-height: 1.5;
+}
+
+h1, h2, h3 {
+  font-family: 'Merriweather', serif;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #1f4f2b;
+  color: white;
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0,40,0,0.1);
+}
+
+.navbar .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.7rem;
+  font-weight: 700;
+  font-family: 'Merriweather', serif;
+}
+
+.logo i {
+  color: #f5e7c8;
+  font-size: 2rem;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nav-links a {
+  color: #f0f7e6;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+  font-size: 1rem;
+}
+
+.nav-links a:hover {
+  color: #ffd966;
+}
+
+.btn {
+  display: inline-block;
+  background-color: #e9b741;
+  color: #1f4f2b;
+  font-weight: 600;
+  padding: 0.6rem 1.4rem;
+  border-radius: 40px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 2px solid #e9b741;
+  color: #e9b741;
+}
+
+.btn:hover {
+  background-color: #dda52d;
+  color: #1f4f2b;
+  transform: scale(1.02);
+}
+
+.btn-outline:hover {
+  background-color: #e9b741;
+  color: #1f4f2b;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(115deg, #e2f0da 0%, #c8e0c0 100%);
+  padding: 4rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '🌸';
+  position: absolute;
+  font-size: 4rem;
+  opacity: 0.15;
+  top: 10%;
+  left: 5%;
+  animation: float 6s ease-in-out infinite;
+}
+
+.hero::after {
+  content: '🌺';
+  position: absolute;
+  font-size: 3rem;
+  opacity: 0.15;
+  bottom: 15%;
+  right: 8%;
+  animation: float 5s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.hero .container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.hero h1 {
+  font-size: 2.8rem;
+  line-height: 1.2;
+  color: #1d3e1d;
+  margin-bottom: 1.5rem;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #2b532b;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.hero-image {
+  background: url('https://images.unsplash.com/photo-1523348837708-15d4a6cf8d2e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
+  border-radius: 30px;
+  min-height: 300px;
+  box-shadow: 0 20px 30px -10px rgba(60,90,40,0.3);
+}
+
+/* Section Titles */
+.section-title {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.section-title h2 {
+  font-size: 2.2rem;
+  color: #1d4b1d;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+}
+
+.section-title h2:after {
+  content: '🌸';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+}
+
+/* Role Cards */
+.roles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+.role-card {
+  background: white;
+  border-radius: 28px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 10px 25px -8px rgba(0,40,0,0.1);
+  text-align: center;
+  transition: all 0.3s;
+  border: 1px solid #deecce;
+  position: relative;
+  overflow: hidden;
+}
+
+.role-card::before {
+  content: '🌼';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 3rem;
+  opacity: 0.1;
+  transform: rotate(15deg);
+}
+
+.role-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 15px 35px -10px rgba(0,40,0,0.2);
+}
+
+.role-icon {
+  font-size: 2.8rem;
+  color: #1f4f2b;
+  background: #e4f2da;
+  width: 80px;
+  height: 80px;
+  line-height: 80px !important;
+  border-radius: 50%;
+  margin: 0 auto 1.2rem;
+  text-align: center;
+}
+
+.role-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.role-card p {
+  color: #3f5a3f;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+.role-tag {
+  background: #f5edda;
+  color: #1f4f2b;
+  font-weight: 600;
+  padding: 0.3rem 1rem;
+  border-radius: 40px;
+  display: inline-block;
+  font-size: 0.8rem;
+}
+
+/* Features Grid */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+.feature-item {
+  background: #fafcf8;
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  border-left: 8px solid #4c7a4c;
+  box-shadow: 0 8px 20px rgba(0,20,0,0.04);
+}
+
+.feature-item i {
+  font-size: 2.2rem;
+  color: #1f4f2b;
+  margin-bottom: 1rem;
+}
+
+.feature-item h3 {
+  margin-bottom: 0.8rem;
+}
+
+.feature-item p {
+  color: #2b3f2b;
+}
+
+/* Resource Showcase */
+.resource-showcase {
+  background: linear-gradient(180deg, #eaf3e4 0%, #f5f9f0 100%);
+  padding: 4rem 0;
+  position: relative;
+}
+
+.resource-showcase::before {
+  content: '🌻';
+  position: absolute;
+  font-size: 5rem;
+  opacity: 0.08;
+  top: 5%;
+  right: 10%;
+  animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  background: white;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 12px 24px -12px rgba(0,32,0,0.2);
+  transition: all 0.3s;
+  position: relative;
+}
+
+.card::after {
+  content: '🌷';
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 1.5rem;
+  opacity: 0.15;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px -10px rgba(0,32,0,0.3);
+}
+
+.card-img {
+  height: 150px;
+  background-color: #bcd0aa;
+  background-size: cover;
+  background-position: center;
+}
+
+.card-content {
+  padding: 1.5rem;
+}
+
+.card-content h4 {
+  font-size: 1.2rem;
+  margin-bottom: 0.3rem;
+  color: #1d4b1d;
+}
+
+.card-content .meta {
+  font-size: 0.85rem;
+  color: #6a7e6a;
+  margin-bottom: 0.8rem;
+}
+
+.card-content p {
+  color: #364a36;
+}
+
+/* CTA Banner */
+.cta-banner {
+  background: linear-gradient(135deg, #2b5e2b 0%, #1f4f2b 100%);
+  color: white;
+  padding: 4rem 2rem;
+  text-align: center;
+  border-radius: 60px 60px 0 0;
+  margin-top: 3rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-banner::before {
+  content: '🌹';
+  position: absolute;
+  font-size: 6rem;
+  opacity: 0.1;
+  top: 20%;
+  left: 10%;
+}
+
+.cta-banner::after {
+  content: '🌺';
+  position: absolute;
+  font-size: 5rem;
+  opacity: 0.1;
+  bottom: 20%;
+  right: 10%;
+}
+
+.cta-banner h2 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+}
+
+.cta-banner .btn {
+  background: #ffde9e;
+  color: #1d4b1d;
+  font-size: 1.2rem;
+  padding: 0.8rem 2.5rem;
+  margin-top: 1.5rem;
+}
+
+/* Footer */
+footer {
+  background: #17331a;
+  color: #d2dfc6;
+  padding: 3rem 0 1.5rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-col p {
+  margin: 1rem 0;
+}
+
+.footer-col i {
+  margin-right: 0.5rem;
+  color: #e9b741;
+}
+
+.copyright {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid #366136;
+  font-size: 0.9rem;
+}
+
+/* Demo Button */
+.demo-alert-btn {
+  background: none;
+  border: 1px dashed #4f7a4f;
+  padding: 0.3rem 1rem;
+  border-radius: 40px;
+  color: #1d4b1d;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.demo-alert-btn:hover {
+  background: #e2efd2;
+}
+
+/* Mobile Responsive */
+@media (max-width: 700px) {
+  .navbar .container {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  .hero .container {
+    grid-template-columns: 1fr;
+  }
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+}

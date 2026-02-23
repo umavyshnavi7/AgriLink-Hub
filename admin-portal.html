@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Management Portal - AgriLink Hub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo"><i class="fas fa-seedling"></i><span>AgriLink Hub - Admin</span></div>
+      <div class="nav-links">
+        <a href="admin-portal.html">Manage Tools</a>
+        <a href="admin-bookings.html">View Bookings</a>
+        <a href="far.html" class="btn">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="margin-top: 2rem;">
+    <div class="welcome">
+      <h1>🛠️ Admin Management Portal</h1>
+      <p>Manage farming tools inventory and bookings</p>
+    </div>
+
+    <!-- Add New Tool Form -->
+    <div style="background: white; padding: 2rem; border-radius: 20px; margin: 2rem 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+      <h2 style="color: #1f4f2b; margin-bottom: 1.5rem;">➕ Add New Farming Tool</h2>
+      <form id="addToolForm" style="display: grid; gap: 1rem;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
+          <input type="text" id="toolName" placeholder="Tool Name" required style="padding: 0.8rem; border: 2px solid #deecce; border-radius: 12px;">
+          <select id="toolCategory" required style="padding: 0.8rem; border: 2px solid #deecce; border-radius: 12px;">
+            <option value="">Select Category</option>
+            <option value="Tractor">Tractor</option>
+            <option value="Harvester">Harvester</option>
+            <option value="Sprayer">Sprayer</option>
+            <option value="Tiller">Tiller</option>
+            <option value="Irrigation">Irrigation</option>
+            <option value="Other">Other</option>
+          </select>
+          <input type="number" id="toolPrice" placeholder="Price per day (₹)" required style="padding: 0.8rem; border: 2px solid #deecce; border-radius: 12px;">
+          <input type="number" id="toolStock" placeholder="Available Stock" required style="padding: 0.8rem; border: 2px solid #deecce; border-radius: 12px;">
+        </div>
+        <textarea id="toolDescription" placeholder="Tool Description" rows="3" style="padding: 0.8rem; border: 2px solid #deecce; border-radius: 12px;"></textarea>
+        <button type="submit" class="btn" style="background: #2b7a2b; color: white; padding: 1rem; border: none; border-radius: 12px; cursor: pointer;">Add Tool</button>
+      </form>
+    </div>
+
+    <!-- Tools Inventory -->
+    <div style="background: white; padding: 2rem; border-radius: 20px; margin: 2rem 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+      <h2 style="color: #1f4f2b; margin-bottom: 1.5rem;">📦 Current Inventory</h2>
+      <div id="toolsList"></div>
+    </div>
+  </div>
+
+  <script>
+    // Load tools from localStorage
+    function loadTools() {
+      const tools = JSON.parse(localStorage.getItem('farmingTools') || '[]');
+      const toolsList = document.getElementById('toolsList');
+      
+      if (tools.length === 0) {
+        toolsList.innerHTML = '<p style="color: #666;">No tools added yet. Add your first tool above.</p>';
+        return;
+      }
+      
+      toolsList.innerHTML = tools.map((tool, index) => `
+        <div style="background: #f9f7eb; padding: 1.5rem; border-radius: 15px; margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+          <div style="flex: 1;">
+            <h3 style="color: #1f4f2b; margin-bottom: 0.5rem;">${tool.name}</h3>
+            <p style="color: #666; margin-bottom: 0.5rem;">${tool.description}</p>
+            <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+              <span style="background: #e9b741; padding: 0.3rem 0.8rem; border-radius: 12px; font-size: 0.9rem;">${tool.category}</span>
+              <span style="color: #2b7a2b; font-weight: bold;">₹${tool.price}/day</span>
+              <span style="color: #666;">Stock: ${tool.stock}</span>
+            </div>
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <button onclick="editTool(${index})" style="background: #4a90e2; color: white; padding: 0.5rem 1rem; border: none; border-radius: 8px; cursor: pointer;">Edit</button>
+            <button onclick="deleteTool(${index})" style="background: #c62828; color: white; padding: 0.5rem 1rem; border: none; border-radius: 8px; cursor: pointer;">Delete</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Add new tool
+    document.getElementById('addToolForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const tool = {
+        name: document.getElementById('toolName').value,
+        category: document.getElementById('toolCategory').value,
+        price: document.getElementById('toolPrice').value,
+        stock: document.getElementById('toolStock').value,
+        description: document.getElementById('toolDescription').value,
+        id: Date.now()
+      };
+      
+      const tools = JSON.parse(localStorage.getItem('farmingTools') || '[]');
+      tools.push(tool);
+      localStorage.setItem('farmingTools', JSON.stringify(tools));
+      
+      alert('✅ Tool added successfully!');
+      document.getElementById('addToolForm').reset();
+      loadTools();
+    });
+
+    // Delete tool
+    function deleteTool(index) {
+      if (confirm('Are you sure you want to delete this tool?')) {
+        const tools = JSON.parse(localStorage.getItem('farmingTools') || '[]');
+        tools.splice(index, 1);
+        localStorage.setItem('farmingTools', JSON.stringify(tools));
+        alert('✅ Tool deleted successfully!');
+        loadTools();
+      }
+    }
+
+    // Edit tool
+    function editTool(index) {
+      const tools = JSON.parse(localStorage.getItem('farmingTools') || '[]');
+      const tool = tools[index];
+      
+      document.getElementById('toolName').value = tool.name;
+      document.getElementById('toolCategory').value = tool.category;
+      document.getElementById('toolPrice').value = tool.price;
+      document.getElementById('toolStock').value = tool.stock;
+      document.getElementById('toolDescription').value = tool.description;
+      
+      deleteTool(index);
+    }
+
+    // Load tools on page load
+    loadTools();
+  </script>
+  <script src="auth-check.js"></script>
+</body>
+</html>

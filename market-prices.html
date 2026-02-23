@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marketplace - AgriLink Hub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .market-section { background: white; padding: 2rem; border-radius: 24px; margin: 2rem 0; box-shadow: 0 8px 20px rgba(0,20,0,0.1); }
+    .market-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 3px solid #e9b741; padding-bottom: 1rem; }
+    .market-name { font-size: 1.8rem; color: #1f4f2b; font-weight: 700; }
+    .market-location { color: #6a7e6a; font-size: 0.9rem; }
+    .price-table { width: 100%; border-collapse: collapse; }
+    .price-table th { background: #e4f2da; padding: 1rem; text-align: left; color: #1f4f2b; font-weight: 600; border-bottom: 2px solid #4c7a4c; }
+    .price-table td { padding: 1rem; border-bottom: 1px solid #deecce; }
+    .price-table tr:hover { background: #f9f7eb; }
+    .crop-name { font-weight: 600; color: #2e3b2e; }
+    .price-value { font-size: 1.3rem; font-weight: 700; color: #2b7a2b; }
+    .trend-up { color: #2e7d32; font-size: 0.9rem; }
+    .trend-down { color: #c62828; font-size: 0.9rem; }
+    .category-badge { background: #f5edda; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.8rem; color: #1f4f2b; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo"><i class="fas fa-seedling"></i><span>AgriLink Hub</span></div>
+      <div class="nav-links">
+        <a href="far.html">Home</a>
+        <a href="marketplace.html">Marketplace</a>
+        <a href="far.html" class="btn">Back</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="margin-top: 2rem;">
+    <div class="welcome">
+      <h1>🌾 Market Prices - Live Updates</h1>
+      <p>Real-time crop prices from major mandis across regions • Updated hourly</p>
+    </div>
+
+    <!-- Bangalore Market -->
+    <div class="market-section">
+      <div class="market-header">
+        <div>
+          <div class="market-name">🏛️ Bangalore APMC Market</div>
+          <div class="market-location"><i class="fas fa-map-marker-alt"></i> Karnataka • Last updated: 2 hours ago</div>
+        </div>
+      </div>
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>Crop</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Trend</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="crop-name">Ragi (Finger Millet)</td>
+            <td><span class="category-badge">Millets</span></td>
+            <td class="price-value">₹3,200/quintal</td>
+            <td class="trend-up">↑ 3.2%</td>
+          </tr>
+          <tr>
+            <td class="crop-name">Maize</td>
+            <td><span class="category-badge">Grains</span></td>
+            <td class="price-value">₹25/kg</td>
+            <td class="trend-up">↑ 2.5%</td>
+          </tr>
+          <tr>
+            <td class="crop-name">Banana</td>
+            <td><span class="category-badge">Fruits</span></td>
+            <td class="price-value">₹20-25/kg</td>
+            <td class="trend-up">↑ 1.5%</td>
+          </tr>
+          <tr>
+            <td class="crop-name">Tomato</td>
+            <td><span class="category-badge">Vegetables</span></td>
+            <td class="price-value">₹18/kg</td>
+            <td class="trend-up">↑ 5.0%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Karnal Market -->
+    <div class="market-section">
+      <div class="market-header">
+        <div>
+          <div class="market-name">🏛️ Karnal Mandi, Haryana</div>
+          <div class="market-location"><i class="fas fa-map-marker-alt"></i> Haryana • Last updated: 1 hour ago</div>
+        </div>
+      </div>
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>Crop</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Trend</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="crop-name">Basmati Paddy (Premium)</td>
+            <td><span class="category-badge">Grains</span></td>
+            <td class="price-value">₹4,500/quintal</td>
+            <td class="trend-up">↑ 3.8%</td>
+          </tr>
+          <tr>
+            <td class="crop-name">Wheat</td>
+            <td><span class="category-badge">Grains</span></td>
+            <td class="price-value">₹2,125/quintal</td>
+            <td class="trend-up">↑ 1.8%</td>
+          </tr>
+          <tr>
+            <td class="crop-name">Mustard Seed</td>
+            <td><span class="category-badge">Pulses & Spices</span></td>
+            <td class="price-value">₹60-65/kg</td>
+            <td class="trend-up">↑ 2.1%</td>
+          </tr>
+          <tr>
+            <td class="crop-name">Potato</td>
+            <td><span class="category-badge">Vegetables</span></td>
+            <td class="price-value">₹15-20/kg</td>
+            <td class="trend-down">↓ 1.2%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Mumbai Market -->
+    <div class="market-section">
+      <div class="market-header">
+        <div>
+          <div class="market-name">🏛️ Vashi APMC Market, Mumbai</div>
+          <div class="market-location"><i class="fas fa-map-marker-alt"></i> Maharashtra • Last updated: 3 hours ago</div>
+        </div>
+      </div>
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>Crop</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Trend</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="crop-name">Maize</td>
+            <td><span class="category-badge">Grains</span></td>
+            <td class="price-value">₹2,300-2,700/quintal</td>
+            <td class="trend-up">↑ 1.5%</td>
+          </tr>
+          <tr>
+            <td class="crop-name">Cardamom</td>
+            <td><span class="category-badge">Pulses & Spices</span></td>
+            <td class="price-value">₹2,400-3,000/kg</td>
+            <td class="trend-up">↑ 4.5%</td>
+          </tr>
+          <tr>
+            <td class="crop-name">Lemon</td>
+            <td><span class="category-badge">Fruits</span></td>
+            <td class="price-value">₹55-60/kg</td>
+            <td class="trend-up">↑ 3.5%</td>
+          </tr>
+          <tr>
+            <td class="crop-name">Tomato</td>
+            <td><span class="category-badge">Vegetables</span></td>
+            <td class="price-value">₹22/kg</td>
+            <td class="trend-up">↑ 6.0%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Delhi Market -->
+    <div class="market-section">
+      <div class="market-header">
+        <div>
+          <div class="market-name">🏛️ Azadpur Mandi, Delhi</div>
+          <div class="market-location"><i class="fas fa-map-marker-alt"></i> Delhi NCR • Last updated: 2 hours ago</div>
+        </div>
+      </div>
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>Crop</th>
+            <th>Category</th>
+            <th>Price</th>
+            <th>Trend</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="crop-name">Paddy (Regular)</td>
+            <td><span class="category-badge">Grains</span></td>
+            <td class="price-value">₹2,850/quintal</td>
+            <td class="trend-up">↑ 2.5%</td>
+          </tr>
+          <tr>
+            <td class="crop-name">Potato</td>
+            <td><span class="category-badge">Vegetables</span></td>
+            <td class="price-value">₹18/kg</td>
+            <td class="trend-down">↓ 0.8%</td>
+          </tr>
+          <tr>
+            <td class="crop-name">Banana</td>
+            <td><span class="category-badge">Fruits</span></td>
+            <td class="price-value">₹22/kg</td>
+            <td class="trend-up">↑ 1.5%</td>
+          </tr>
+          <tr>
+            <td class="crop-name">Lemon</td>
+            <td><span class="category-badge">Fruits</span></td>
+            <td class="price-value">₹58/kg</td>
+            <td class="trend-up">↑ 2.0%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

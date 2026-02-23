@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Farmer Services - AgriLink Hub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo"><i class="fas fa-seedling"></i><span>AgriLink Hub</span></div>
+      <div class="nav-links">
+        <a href="far.html">Home</a>
+        <a href="login.html?role=farmer" class="btn">Login as Farmer</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="margin-top: 2rem;">
+    <div class="welcome">
+      <h1>🚜 Equipment Rental Services</h1>
+      <p>Access modern farming equipment at affordable rates</p>
+      <button onclick="viewMyBookings()" style="background: #2b7a2b; color: white; padding: 0.8rem 1.5rem; border: none; border-radius: 12px; cursor: pointer; font-weight: 600; margin-top: 1rem;">📋 View My Bookings</button>
+    </div>
+
+    <!-- Equipment Rental Details -->
+    <div style="margin: 3rem 0;">
+      <h2 style="font-family: 'Merriweather', serif; color: #1f4f2b; margin-bottom: 1.5rem;">🛠️ Available Equipment</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+        
+        <div style="background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+          <i class="fas fa-tractor" style="font-size: 3rem; color: #1f4f2b;"></i>
+          <h3 style="color: #1f4f2b; margin: 1rem 0;">Tractors</h3>
+          <p style="color: #666; margin-bottom: 1rem;">Heavy-duty tractors for plowing, tilling, and transportation</p>
+          <div style="background: #f9f7eb; padding: 1rem; border-radius: 12px; margin: 1rem 0;">
+            <p><strong>20-30 HP:</strong> ₹800/day<br>
+            <strong>40-50 HP:</strong> ₹1,200/day<br>
+            <strong>60+ HP:</strong> ₹1,800/day</p>
+          </div>
+          <ul style="line-height: 1.8;">
+            <li>✅ Fuel included</li>
+            <li>✅ Operator available</li>
+            <li>✅ Free delivery (10km)</li>
+            <li>✅ Insurance covered</li>
+          </ul>
+          <button class="btn" style="margin-top: 1rem; width: 100%;" onclick="openBooking('Tractor', '800-1800')">Book Now</button>
+        </div>
+
+        <div style="background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+          <i class="fas fa-seedling" style="font-size: 3rem; color: #2b7a2b;"></i>
+          <h3 style="color: #1f4f2b; margin: 1rem 0;">Tillers & Cultivators</h3>
+          <p style="color: #666; margin-bottom: 1rem;">Soil preparation and seedbed making equipment</p>
+          <div style="background: #f9f7eb; padding: 1rem; border-radius: 12px; margin: 1rem 0;">
+            <p><strong>Power Tiller:</strong> ₹500/day<br>
+            <strong>Rotavator:</strong> ₹600/day<br>
+            <strong>Cultivator:</strong> ₹400/day</p>
+          </div>
+          <ul style="line-height: 1.8;">
+            <li>✅ Multiple attachments</li>
+            <li>✅ Easy to operate</li>
+            <li>✅ Maintenance included</li>
+            <li>✅ Training provided</li>
+          </ul>
+          <button class="btn" style="margin-top: 1rem; width: 100%;" onclick="openBooking('Tiller', '400-600')">Book Now</button>
+        </div>
+
+        <div style="background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+          <i class="fas fa-cut" style="font-size: 3rem; color: #e9b741;"></i>
+          <h3 style="color: #1f4f2b; margin: 1rem 0;">Harvesters</h3>
+          <p style="color: #666; margin-bottom: 1rem;">Efficient crop harvesting machines</p>
+          <div style="background: #f9f7eb; padding: 1rem; border-radius: 12px; margin: 1rem 0;">
+            <p><strong>Reaper:</strong> ₹1,500/day<br>
+            <strong>Combine Harvester:</strong> ₹3,500/day<br>
+            <strong>Thresher:</strong> ₹800/day</p>
+          </div>
+          <ul style="line-height: 1.8;">
+            <li>✅ Saves 60-70% labor</li>
+            <li>✅ Fast harvesting</li>
+            <li>✅ Minimal grain loss</li>
+            <li>✅ Expert operator</li>
+          </ul>
+          <button class="btn" style="margin-top: 1rem; width: 100%;" onclick="openBooking('Harvester', '800-3500')">Book Now</button>
+        </div>
+
+        <div style="background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+          <i class="fas fa-spray-can" style="font-size: 3rem; color: #4a90e2;"></i>
+          <h3 style="color: #1f4f2b; margin: 1rem 0;">Sprayers</h3>
+          <p style="color: #666; margin-bottom: 1rem;">Pesticide and fertilizer application equipment</p>
+          <div style="background: #f9f7eb; padding: 1rem; border-radius: 12px; margin: 1rem 0;">
+            <p><strong>Manual Sprayer:</strong> ₹100/day<br>
+            <strong>Power Sprayer:</strong> ₹400/day<br>
+            <strong>Drone Sprayer:</strong> ₹2,000/day</p>
+          </div>
+          <ul style="line-height: 1.8;">
+            <li>✅ Uniform coverage</li>
+            <li>✅ Saves chemicals</li>
+            <li>✅ 10x faster</li>
+            <li>✅ Safety equipment</li>
+          </ul>
+          <button class="btn" style="margin-top: 1rem; width: 100%;" onclick="openBooking('Sprayer', '100-2000')">Book Now</button>
+        </div>
+
+        <div style="background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+          <i class="fas fa-water" style="font-size: 3rem; color: #20b2aa;"></i>
+          <h3 style="color: #1f4f2b; margin: 1rem 0;">Irrigation Equipment</h3>
+          <p style="color: #666; margin-bottom: 1rem;">Water pumps and irrigation systems</p>
+          <div style="background: #f9f7eb; padding: 1rem; border-radius: 12px; margin: 1rem 0;">
+            <p><strong>Water Pump:</strong> ₹300/day<br>
+            <strong>Drip System:</strong> ₹500/day<br>
+            <strong>Sprinkler:</strong> ₹400/day</p>
+          </div>
+          <ul style="line-height: 1.8;">
+            <li>✅ Saves 40-60% water</li>
+            <li>✅ Installation support</li>
+            <li>✅ Energy efficient</li>
+            <li>✅ Flexible rental</li>
+          </ul>
+          <button class="btn" style="margin-top: 1rem; width: 100%;" onclick="openBooking('Irrigation Equipment', '300-500')">Book Now</button>
+        </div>
+
+        <div style="background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+          <i class="fas fa-truck" style="font-size: 3rem; color: #ff6b6b;"></i>
+          <h3 style="color: #1f4f2b; margin: 1rem 0;">Transport Vehicles</h3>
+          <p style="color: #666; margin-bottom: 1rem;">Crop transportation and logistics</p>
+          <div style="background: #f9f7eb; padding: 1rem; border-radius: 12px; margin: 1rem 0;">
+            <p><strong>Mini Truck:</strong> ₹1,000/day<br>
+            <strong>Pickup:</strong> ₹800/day<br>
+            <strong>Trailer:</strong> ₹1,500/day</p>
+          </div>
+          <ul style="line-height: 1.8;">
+            <li>✅ Farm to market</li>
+            <li>✅ Driver included</li>
+            <li>✅ Loading assistance</li>
+            <li>✅ GPS tracking</li>
+          </ul>
+          <button class="btn" style="margin-top: 1rem; width: 100%;" onclick="openBooking('Transport Vehicle', '800-1500')">Book Now</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rental Benefits -->
+    <div style="margin: 3rem 0; background: #f9f7eb; padding: 2rem; border-radius: 20px;">
+      <h2 style="font-family: 'Merriweather', serif; color: #1f4f2b; margin-bottom: 1.5rem;">✨ Why Rent Equipment?</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+        <div style="background: white; padding: 1.5rem; border-radius: 15px;">
+          <h4 style="color: #2b7a2b;">💰 Cost Effective</h4>
+          <p>Save 70-80% compared to buying new equipment</p>
+        </div>
+        <div style="background: white; padding: 1.5rem; border-radius: 15px;">
+          <h4 style="color: #2b7a2b;">🔧 No Maintenance</h4>
+          <p>All repairs and servicing included in rental</p>
+        </div>
+        <div style="background: white; padding: 1.5rem; border-radius: 15px;">
+          <h4 style="color: #2b7a2b;">🚚 Free Delivery</h4>
+          <p>Equipment delivered to your farm within 10km</p>
+        </div>
+        <div style="background: white; padding: 1.5rem; border-radius: 15px;">
+          <h4 style="color: #2b7a2b;">👨‍🏫 Training Provided</h4>
+          <p>Learn to operate equipment safely and efficiently</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA Section -->
+    <div style="background: linear-gradient(135deg, #1f4f2b 0%, #2b7a2b 100%); padding: 3rem; border-radius: 20px; text-align: center; color: white; margin: 3rem 0;">
+      <h2 style="color: white; margin-bottom: 1rem;">Ready to Rent Equipment?</h2>
+      <p style="font-size: 1.2rem; margin-bottom: 2rem;">Call us or login to book online</p>
+      <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+        <a href="tel:18001801551" class="btn" style="background: #e9b741; color: #1f4f2b; padding: 1rem 2rem; text-decoration: none; border-radius: 12px; font-weight: 600; display: inline-block;">📞 Call: 1800-180-1551</a>
+        <a href="login.html?role=farmer" class="btn" style="background: white; color: #1f4f2b; padding: 1rem 2rem; text-decoration: none; border-radius: 12px; font-weight: 600; display: inline-block;">Login to Book</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    function openBooking(equipment, price) {
+      const name = prompt('Enter your name:');
+      if (!name) return;
+      const phone = prompt('Enter your phone number:');
+      if (!phone) return;
+      const address = prompt('Enter your address:');
+      if (!address) return;
+      const date = prompt('Enter booking date (YYYY-MM-DD):');
+      if (!date) return;
+      const days = prompt('Enter number of days:');
+      if (!days) return;
+      
+      const booking = {
+        toolName: equipment,
+        farmerName: name,
+        farmerPhone: phone,
+        farmerAddress: address,
+        bookingDate: date,
+        days: days,
+        status: 'Confirmed'
+      };
+      
+      const bookings = JSON.parse(localStorage.getItem('equipmentBookings') || '[]');
+      bookings.push(booking);
+      localStorage.setItem('equipmentBookings', JSON.stringify(bookings));
+      
+      alert('✅ Booking confirmed! Equipment: ' + equipment);
+    }
+    
+    function viewMyBookings() {
+      const bookings = JSON.parse(localStorage.getItem('equipmentBookings') || '[]');
+      if (bookings.length === 0) {
+        alert('No bookings found.');
+        return;
+      }
+      let msg = '📋 Your Bookings:\n\n';
+      bookings.forEach((b, i) => {
+        msg += `${i+1}. ${b.toolName}\n   Date: ${b.bookingDate}\n   Duration: ${b.days} days\n   Status: ${b.status}\n\n`;
+      });
+      alert(msg);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crop Management - AgriLink Hub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .crop-card { background: white; padding: 2rem; border-radius: 20px; margin: 1.5rem 0; box-shadow: 0 8px 20px rgba(0,20,0,0.1); }
+    .crop-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+    .crop-name { font-size: 1.5rem; color: #1f4f2b; font-weight: 700; }
+    .status-badge { padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600; }
+    .status-healthy { background: #e8f5e9; color: #2e7d32; }
+    .status-warning { background: #fff3e0; color: #f57c00; }
+    .status-alert { background: #ffebee; color: #c62828; }
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+    .info-box { background: #f9f7eb; padding: 1rem; border-radius: 12px; text-align: center; }
+    .info-label { font-size: 0.85rem; color: #6a7e6a; }
+    .info-value { font-size: 1.3rem; font-weight: 700; color: #1f4f2b; margin-top: 0.3rem; }
+    .alert-box { background: #fff3e0; border-left: 4px solid #f57c00; padding: 1rem; border-radius: 8px; margin: 1rem 0; }
+    .weather-widget { background: linear-gradient(135deg, #4a90e2 0%, #357abd 100%); color: white; padding: 2rem; border-radius: 20px; margin: 2rem 0; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo"><i class="fas fa-seedling"></i><span>AgriLink Hub</span></div>
+      <div class="nav-links">
+        <a href="far.html">Home</a>
+        <a href="farmer-dashboard.html">Dashboard</a>
+        <a href="far.html" class="btn">Back</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="margin-top: 2rem;">
+    <div class="welcome">
+      <h1>🌾 Crop Management System</h1>
+      <p>Track your crops, get pest alerts, and weather updates</p>
+    </div>
+
+    <!-- Weather Widget -->
+    <div class="weather-widget">
+      <h3 style="margin-bottom: 1rem;"><i class="fas fa-cloud-sun"></i> Today's Weather</h3>
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 2rem;">
+        <div>
+          <div style="font-size: 3rem; font-weight: 700;">28°C</div>
+          <div>Partly Cloudy</div>
+        </div>
+        <div style="text-align: center;">
+          <div><i class="fas fa-tint"></i> Humidity: 65%</div>
+          <div><i class="fas fa-wind"></i> Wind: 12 km/h</div>
+          <div><i class="fas fa-cloud-rain"></i> Rain: 20% chance</div>
+        </div>
+        <div>
+          <div style="font-weight: 600;">7-Day Forecast</div>
+          <div style="font-size: 0.9rem;">Mostly sunny, good for irrigation</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Crop 1: Rice -->
+    <div class="crop-card">
+      <div class="crop-header">
+        <div class="crop-name">🌾 Rice (Paddy)</div>
+        <span class="status-badge status-healthy">Healthy</span>
+      </div>
+      <div class="info-grid">
+        <div class="info-box">
+          <div class="info-label">Planted</div>
+          <div class="info-value">45 days ago</div>
+        </div>
+        <div class="info-box">
+          <div class="info-label">Area</div>
+          <div class="info-value">2.5 acres</div>
+        </div>
+        <div class="info-box">
+          <div class="info-label">Growth Stage</div>
+          <div class="info-value">Tillering</div>
+        </div>
+        <div class="info-box">
+          <div class="info-label">Expected Harvest</div>
+          <div class="info-value">75 days</div>
+        </div>
+      </div>
+      <div style="margin-top: 1.5rem;">
+        <h4 style="color: #1f4f2b; margin-bottom: 0.5rem;">Recommendations:</h4>
+        <p>✓ Apply nitrogen fertilizer (20 kg/acre)</p>
+        <p>✓ Maintain water level at 2-3 inches</p>
+        <p>✓ Monitor for stem borer</p>
+      </div>
+    </div>
+
+    <!-- Crop 2: Wheat -->
+    <div class="crop-card">
+      <div class="crop-header">
+        <div class="crop-name">🌾 Wheat</div>
+        <span class="status-badge status-warning">Needs Attention</span>
+      </div>
+      <div class="info-grid">
+        <div class="info-box">
+          <div class="info-label">Planted</div>
+          <div class="info-value">60 days ago</div>
+        </div>
+        <div class="info-box">
+          <div class="info-label">Area</div>
+          <div class="info-value">3 acres</div>
+        </div>
+        <div class="info-box">
+          <div class="info-label">Growth Stage</div>
+          <div class="info-value">Flowering</div>
+        </div>
+        <div class="info-box">
+          <div class="info-label">Expected Harvest</div>
+          <div class="info-value">50 days</div>
+        </div>
+      </div>
+      <div class="alert-box">
+        <strong><i class="fas fa-exclamation-triangle"></i> Pest Alert:</strong> Aphid infestation detected in nearby fields. Apply neem oil spray as preventive measure.
+      </div>
+      <div style="margin-top: 1.5rem;">
+        <h4 style="color: #1f4f2b; margin-bottom: 0.5rem;">Recommendations:</h4>
+        <p>⚠️ Apply neem oil spray (preventive)</p>
+        <p>✓ Reduce irrigation frequency</p>
+        <p>✓ Apply potash fertilizer (15 kg/acre)</p>
+      </div>
+    </div>
+
+    <!-- Crop 3: Tomato -->
+    <div class="crop-card">
+      <div class="crop-header">
+        <div class="crop-name">🍅 Tomato</div>
+        <span class="status-badge status-healthy">Healthy</span>
+      </div>
+      <div class="info-grid">
+        <div class="info-box">
+          <div class="info-label">Planted</div>
+          <div class="info-value">30 days ago</div>
+        </div>
+        <div class="info-box">
+          <div class="info-label">Area</div>
+          <div class="info-value">0.5 acres</div>
+        </div>
+        <div class="info-box">
+          <div class="info-label">Growth Stage</div>
+          <div class="info-value">Vegetative</div>
+        </div>
+        <div class="info-box">
+          <div class="info-label">Expected Harvest</div>
+          <div class="info-value">50 days</div>
+        </div>
+      </div>
+      <div style="margin-top: 1.5rem;">
+        <h4 style="color: #1f4f2b; margin-bottom: 0.5rem;">Recommendations:</h4>
+        <p>✓ Stake plants for support</p>
+        <p>✓ Apply organic compost</p>
+        <p>✓ Water regularly (morning hours)</p>
+      </div>
+    </div>
+
+    <!-- Crop 4: Maize -->
+    <div class="crop-card">
+      <div class="crop-header">
+        <div class="crop-name">🌽 Maize</div>
+        <span class="status-badge status-alert">Critical</span>
+      </div>
+      <div class="info-grid">
+        <div class="info-box">
+          <div class="info-label">Planted</div>
+          <div class="info-value">55 days ago</div>
+        </div>
+        <div class="info-box">
+          <div class="info-label">Area</div>
+          <div class="info-value">1.5 acres</div>
+        </div>
+        <div class="info-box">
+          <div class="info-label">Growth Stage</div>
+          <div class="info-value">Tasseling</div>
+        </div>
+        <div class="info-box">
+          <div class="info-label">Expected Harvest</div>
+          <div class="info-value">35 days</div>
+        </div>
+      </div>
+      <div class="alert-box" style="background: #ffebee; border-left-color: #c62828;">
+        <strong><i class="fas fa-bug"></i> Pest Alert:</strong> Fall armyworm detected! Immediate action required. Contact expert or apply recommended pesticide.
+      </div>
+      <div style="margin-top: 1.5rem;">
+        <h4 style="color: #c62828; margin-bottom: 0.5rem;">Urgent Actions:</h4>
+        <p>🚨 Apply biological pesticide (Bt spray)</p>
+        <p>🚨 Remove affected leaves</p>
+        <p>🚨 Contact agricultural expert</p>
+      </div>
+    </div>
+
+    <!-- Add New Crop Button -->
+    <div style="text-align: center; margin: 3rem 0;">
+      <button class="btn" style="font-size: 1.1rem; padding: 1rem 2rem;">
+        <i class="fas fa-plus-circle"></i> Add New Crop
+      </button>
+    </div>
+  </div>
+
+  <script src="auth-check.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

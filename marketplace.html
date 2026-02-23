@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marketplace - AgriLink Hub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .buyer-card { background: white; padding: 2rem; border-radius: 20px; margin: 1.5rem 0; box-shadow: 0 8px 20px rgba(0,20,0,0.1); border-left: 5px solid #4c7a4c; }
+    .buyer-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem; }
+    .buyer-name { font-size: 1.5rem; color: #1f4f2b; font-weight: 700; }
+    .buyer-type { background: #e9b741; padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.9rem; font-weight: 600; color: #1f4f2b; }
+    .buyer-info { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 1rem 0; }
+    .info-item { display: flex; align-items: center; gap: 0.5rem; color: #3f5a3f; }
+    .crops-buying { background: #f9f7eb; padding: 1rem; border-radius: 12px; margin: 1rem 0; }
+    .contact-btn { background: #2b7a2b; color: white; padding: 0.6rem 1.5rem; border-radius: 20px; border: none; cursor: pointer; font-weight: 600; }
+    .contact-btn:hover { background: #1f4f2b; }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo"><i class="fas fa-seedling"></i><span>AgriLink Hub</span></div>
+      <div class="nav-links">
+        <a href="far.html">Home</a>
+        <a href="marketplace.html">Marketplace</a>
+        <a href="market-prices.html">Market Prices</a>
+        <a href="far.html" class="btn">Back</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="margin-top: 2rem;">
+    <div class="welcome">
+      <h1>🏪 Marketplace - Connect with Buyers</h1>
+      <p>Find verified buyers, traders, and suppliers for your produce</p>
+    </div>
+
+    <div class="buyer-card">
+      <div class="buyer-header">
+        <div class="buyer-name">🏬 Agri Traders Co.</div>
+        <span class="buyer-type">Wholesale Buyer</span>
+      </div>
+      <div class="buyer-info">
+        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Bangalore, Karnataka</div>
+        <div class="info-item"><i class="fas fa-star"></i> 4.8 Rating (250 deals)</div>
+        <div class="info-item"><i class="fas fa-check-circle"></i> Verified Buyer</div>
+      </div>
+      <div class="crops-buying">
+        <strong>Buying:</strong> Rice, Wheat, Maize, Ragi, Jowar<br>
+        <strong>Quantity:</strong> 50-500 quintals<br>
+        <strong>Payment:</strong> Within 7 days
+      </div>
+      <button class="contact-btn" onclick="alert('📞 Contact: +91-9876543210')"><i class="fas fa-phone"></i> Contact Buyer</button>
+    </div>
+
+    <div class="buyer-card">
+      <div class="buyer-header">
+        <div class="buyer-name">🏭 Fresh Vegetables Export</div>
+        <span class="buyer-type">Export Company</span>
+      </div>
+      <div class="buyer-info">
+        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Mumbai, Maharashtra</div>
+        <div class="info-item"><i class="fas fa-star"></i> 4.9 Rating (180 deals)</div>
+        <div class="info-item"><i class="fas fa-check-circle"></i> Verified Buyer</div>
+      </div>
+      <div class="crops-buying">
+        <strong>Buying:</strong> Tomato, Potato, Onion, Cabbage, Cauliflower<br>
+        <strong>Quantity:</strong> 100-1000 kg daily<br>
+        <strong>Payment:</strong> Immediate payment
+      </div>
+      <button class="contact-btn" onclick="alert('📞 Contact: +91-9876543211')"><i class="fas fa-phone"></i> Contact Buyer</button>
+    </div>
+
+    <div class="buyer-card">
+      <div class="buyer-header">
+        <div class="buyer-name">🏮 Organic Foods Ltd.</div>
+        <span class="buyer-type">Organic Buyer</span>
+      </div>
+      <div class="buyer-info">
+        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Delhi NCR</div>
+        <div class="info-item"><i class="fas fa-star"></i> 5.0 Rating (95 deals)</div>
+        <div class="info-item"><i class="fas fa-certificate"></i> Organic Certified</div>
+      </div>
+      <div class="crops-buying">
+        <strong>Buying:</strong> Organic Rice, Wheat, Pulses, Vegetables<br>
+        <strong>Quantity:</strong> 20-200 quintals<br>
+        <strong>Payment:</strong> Premium prices + Advance payment
+      </div>
+      <button class="contact-btn" onclick="alert('📞 Contact: +91-9876543212')"><i class="fas fa-phone"></i> Contact Buyer</button>
+    </div>
+
+    <div class="buyer-card">
+      <div class="buyer-header">
+        <div class="buyer-name">🏯 Spice Merchants</div>
+        <span class="buyer-type">Spice Trader</span>
+      </div>
+      <div class="buyer-info">
+        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Kochi, Kerala</div>
+        <div class="info-item"><i class="fas fa-star"></i> 4.7 Rating (320 deals)</div>
+        <div class="info-item"><i class="fas fa-check-circle"></i> Verified Buyer</div>
+      </div>
+      <div class="crops-buying">
+        <strong>Buying:</strong> Cardamom, Pepper, Turmeric, Ginger, Chili<br>
+        <strong>Quantity:</strong> 10-100 kg<br>
+        <strong>Payment:</strong> Within 3 days
+      </div>
+      <button class="contact-btn" onclick="alert('📞 Contact: +91-9876543213')"><i class="fas fa-phone"></i> Contact Buyer</button>
+    </div>
+
+    <div class="buyer-card">
+      <div class="buyer-header">
+        <div class="buyer-name">🏰 Fruit Processing Unit</div>
+        <span class="buyer-type">Processing Company</span>
+      </div>
+      <div class="buyer-info">
+        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Nashik, Maharashtra</div>
+        <div class="info-item"><i class="fas fa-star"></i> 4.6 Rating (150 deals)</div>
+        <div class="info-item"><i class="fas fa-check-circle"></i> Verified Buyer</div>
+      </div>
+      <div class="crops-buying">
+        <strong>Buying:</strong> Mango, Banana, Grapes, Pomegranate, Orange<br>
+        <strong>Quantity:</strong> 500-5000 kg<br>
+        <strong>Payment:</strong> Within 10 days
+      </div>
+      <button class="contact-btn" onclick="alert('📞 Contact: +91-9876543214')"><i class="fas fa-phone"></i> Contact Buyer</button>
+    </div>
+
+    <div class="buyer-card">
+      <div class="buyer-header">
+        <div class="buyer-name">🏭 Dairy & Feed Suppliers</div>
+        <span class="buyer-type">Feed Buyer</span>
+      </div>
+      <div class="buyer-info">
+        <div class="info-item"><i class="fas fa-map-marker-alt"></i> Anand, Gujarat</div>
+        <div class="info-item"><i class="fas fa-star"></i> 4.8 Rating (200 deals)</div>
+        <div class="info-item"><i class="fas fa-check-circle"></i> Verified Buyer</div>
+      </div>
+      <div class="crops-buying">
+        <strong>Buying:</strong> Maize, Bajra, Jowar, Fodder crops<br>
+        <strong>Quantity:</strong> 100-1000 quintals<br>
+        <strong>Payment:</strong> Within 5 days
+      </div>
+      <button class="contact-btn" onclick="alert('📞 Contact: +91-9876543215')"><i class="fas fa-phone"></i> Contact Buyer</button>
+    </div>
+  </div>
+
+  <script src="auth-check.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

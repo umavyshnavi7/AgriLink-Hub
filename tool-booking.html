@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Farming Tools - AgriLink Hub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo"><i class="fas fa-seedling"></i><span>AgriLink Hub</span></div>
+      <div class="nav-links">
+        <a href="far.html">Home</a>
+        <a href="tool-booking.html">Book Tools</a>
+        <a href="far.html" class="btn">Back</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="margin-top: 2rem;">
+    <div class="welcome">
+      <h1>🚜 Book Farming Tools</h1>
+      <p>Select and book equipment for your farm</p>
+    </div>
+
+    <!-- Available Tools -->
+    <div id="availableTools"></div>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+      <div style="background: white; padding: 2rem; border-radius: 20px; max-width: 500px; width: 90%;">
+        <h2 style="color: #1f4f2b; margin-bottom: 1rem;">Book Tool</h2>
+        <form id="bookingForm">
+          <input type="hidden" id="bookToolId">
+          <div style="margin-bottom: 1rem;">
+            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Farmer Name</label>
+            <input type="text" id="farmerName" required style="width: 100%; padding: 0.8rem; border: 2px solid #deecce; border-radius: 12px;">
+          </div>
+          <div style="margin-bottom: 1rem;">
+            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Phone Number</label>
+            <input type="tel" id="farmerPhone" required style="width: 100%; padding: 0.8rem; border: 2px solid #deecce; border-radius: 12px;">
+          </div>
+          <div style="margin-bottom: 1rem;">
+            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Booking Date</label>
+            <input type="date" id="bookingDate" required style="width: 100%; padding: 0.8rem; border: 2px solid #deecce; border-radius: 12px;">
+          </div>
+          <div style="margin-bottom: 1rem;">
+            <label style="display: block; margin-bottom: 0.5rem; font-weight: 600;">Number of Days</label>
+            <input type="number" id="bookingDays" min="1" required style="width: 100%; padding: 0.8rem; border: 2px solid #deecce; border-radius: 12px;">
+          </div>
+          <div style="display: flex; gap: 1rem;">
+            <button type="submit" class="btn" style="flex: 1; background: #2b7a2b; color: white; padding: 1rem; border: none; border-radius: 12px; cursor: pointer;">Confirm Booking</button>
+            <button type="button" onclick="closeModal()" style="flex: 1; background: #666; color: white; padding: 1rem; border: none; border-radius: 12px; cursor: pointer;">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Load available tools
+    function loadAvailableTools() {
+      const tools = JSON.parse(localStorage.getItem('farmingTools') || '[]');
+      const container = document.getElementById('availableTools');
+      
+      if (tools.length === 0) {
+        container.innerHTML = '<div style="background: white; padding: 2rem; border-radius: 20px; text-align: center;"><p style="color: #666;">No tools available for booking at the moment.</p></div>';
+        return;
+      }
+      
+      container.innerHTML = tools.map(tool => `
+        <div style="background: white; padding: 2rem; border-radius: 20px; margin: 1.5rem 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+          <div style="display: flex; justify-content: space-between; align-items: start; flex-wrap: wrap; gap: 1rem;">
+            <div style="flex: 1;">
+              <h2 style="color: #1f4f2b; margin-bottom: 0.5rem;">${tool.name}</h2>
+              <p style="color: #666; margin-bottom: 1rem;">${tool.description}</p>
+              <div style="display: flex; gap: 1rem; flex-wrap: wrap; align-items: center;">
+                <span style="background: #e9b741; padding: 0.4rem 1rem; border-radius: 15px; font-weight: 600;">${tool.category}</span>
+                <span style="color: #2b7a2b; font-size: 1.5rem; font-weight: bold;">₹${tool.price}/day</span>
+                <span style="color: ${tool.stock > 0 ? '#2b7a2b' : '#c62828'}; font-weight: 600;">
+                  ${tool.stock > 0 ? `✅ ${tool.stock} Available` : '❌ Out of Stock'}
+                </span>
+              </div>
+            </div>
+            <button onclick="openBookingModal(${tool.id}, '${tool.name}', ${tool.price})" 
+                    ${tool.stock <= 0 ? 'disabled' : ''}
+                    style="background: ${tool.stock > 0 ? '#2b7a2b' : '#ccc'}; color: white; padding: 1rem 2rem; border: none; border-radius: 12px; cursor: ${tool.stock > 0 ? 'pointer' : 'not-allowed'}; font-weight: 600;">
+              ${tool.stock > 0 ? 'Book Now' : 'Unavailable'}
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Open booking modal
+    function openBookingModal(toolId, toolName, price) {
+      document.getElementById('bookToolId').value = toolId;
+      document.getElementById('bookingModal').style.display = 'flex';
+    }
+
+    // Close modal
+    function closeModal() {
+      document.getElementById('bookingModal').style.display = 'none';
+      document.getElementById('bookingForm').reset();
+    }
+
+    // Submit booking
+    document.getElementById('bookingForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const booking = {
+        toolId: document.getElementById('bookToolId').value,
+        farmerName: document.getElementById('farmerName').value,
+        farmerPhone: document.getElementById('farmerPhone').value,
+        bookingDate: document.getElementById('bookingDate').value,
+        days: document.getElementById('bookingDays').value,
+        bookingId: Date.now(),
+        status: 'Confirmed'
+      };
+      
+      // Save booking
+      const bookings = JSON.parse(localStorage.getItem('toolBookings') || '[]');
+      bookings.push(booking);
+      localStorage.setItem('toolBookings', JSON.stringify(bookings));
+      
+      // Update stock
+      const tools = JSON.parse(localStorage.getItem('farmingTools') || '[]');
+      const toolIndex = tools.findIndex(t => t.id == booking.toolId);
+      if (toolIndex !== -1) {
+        tools[toolIndex].stock--;
+        localStorage.setItem('farmingTools', JSON.stringify(tools));
+      }
+      
+      alert('✅ Booking confirmed! We will contact you shortly.');
+      closeModal();
+      loadAvailableTools();
+    });
+
+    // Load tools on page load
+    loadAvailableTools();
+  </script>
+  <script src="auth-check.js"></script>
+</body>
+</html>
