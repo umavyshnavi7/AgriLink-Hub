@@ -1,5 +1,0 @@
-{
-  "providers": ["java"],
-  "buildCommand": "cd backend && mvn clean package -DskipTests",
-  "startCommand": "java -jar backend/target/agrilink-backend-1.0.0.jar"
-}
