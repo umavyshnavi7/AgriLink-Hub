@@ -12,7 +12,7 @@ cards.forEach(card => {
     if(e.target.tagName === 'A' || e.target.tagName === 'BUTTON') return;
     const role = card.querySelector('h3')?.innerText;
     if(role) {
-      alert(`🔍 You clicked on ${role} role. In the real app, you would see a custom dashboard.`);
+      console.log(`🔍 You clicked on ${role} role. In the real app, you would see a custom dashboard.`);
     }
   });
 });

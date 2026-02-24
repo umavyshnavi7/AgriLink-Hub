@@ -25,8 +25,7 @@
   if (protectedPages.includes(currentPage)) {
     if (!isLoggedIn) {
       // Redirect to login page
-      alert('⚠️ Please login to access this page');
-      window.location.href = 'login.html';
+      window.location.href = 'login.html?error=login_required';
     }
   }
 })();
