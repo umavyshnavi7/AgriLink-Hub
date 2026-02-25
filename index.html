@@ -15,17 +15,24 @@
         <i class="fas fa-seedling"></i>
         <span>AgriLink Hub</span>
       </div>
-      <div class="nav-links">
+      <div class="nav-links" id="navLinks">
         <a href="far.html">Home</a>
         <a href="resources.html">Resources</a>
         <a href="marketplace.html">Marketplace</a>
         <a href="experts.html">Crop Tool Guide</a>
         <a href="initiatives.html">Initiatives</a>
-        <a href="login.html" class="btn btn-outline" style="color:#f5edda; border-color:#f5edda;">Login</a>
-        <a href="signup.html" class="btn" style="background:#f5edda; color:#1f4f2b;">Join</a>
       </div>
     </div>
   </nav>
+  <script>
+    const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+    const navLinks = document.getElementById('navLinks');
+    if (isLoggedIn) {
+      navLinks.innerHTML += '<a href="#" onclick="sessionStorage.clear(); window.location.href=\'far.html\'" class="btn" style="background:#f5edda; color:#1f4f2b;">Logout</a>';
+    } else {
+      navLinks.innerHTML += '<a href="login.html" class="btn btn-outline" style="color:#f5edda; border-color:#f5edda;">Login</a><a href="signup.html" class="btn" style="background:#f5edda; color:#1f4f2b;">Join</a>';
+    }
+  </script>
 
   <section class="hero">
     <div class="container">

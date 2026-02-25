@@ -16,16 +16,19 @@
     'initiatives.html',
     'crop-management.html',
     'farmer-dashboard.html',
+    'farmer-features.html',
     'expert-dashboard.html',
     'admin-dashboard.html',
+    'admin-portal.html',
+    'tool-booking.html',
     'public-dashboard.html'
   ];
   
   // Check if current page is protected
   if (protectedPages.includes(currentPage)) {
     if (!isLoggedIn) {
-      // Redirect to login page
-      window.location.href = 'login.html?error=login_required';
+      alert('⚠️ Please sign up or login to access this page.');
+      window.location.href = 'signup.html';
     }
   }
 })();
