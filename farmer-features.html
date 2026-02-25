@@ -9,12 +9,17 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <script>
+    if (!sessionStorage.getItem('isLoggedIn') || sessionStorage.getItem('userRole') !== 'farmer') {
+      window.location.href = 'login.html?role=farmer';
+    }
+  </script>
   <nav class="navbar">
     <div class="container">
       <div class="logo"><i class="fas fa-seedling"></i><span>AgriLink Hub</span></div>
       <div class="nav-links">
         <a href="far.html">Home</a>
-        <a href="login.html?role=farmer" class="btn">Login as Farmer</a>
+        <a href="#" onclick="sessionStorage.clear(); window.location.href='login.html'" class="btn">Logout</a>
       </div>
     </div>
   </nav>

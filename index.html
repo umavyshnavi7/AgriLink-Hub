@@ -3,87 +3,173 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login - AgriLink Hub</title>
+  <title>AgriLink Hub · Cultivating connections</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; background: linear-gradient(135deg, #e2f0da 0%, #c8e0c0 100%); min-height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-    body::before { content: '🌹'; position: absolute; font-size: 8rem; opacity: 0.1; top: 10%; left: 10%; animation: float 6s ease-in-out infinite; }
-    body::after { content: '🌺'; position: absolute; font-size: 7rem; opacity: 0.1; bottom: 10%; right: 10%; animation: float 5s ease-in-out infinite; }
-    @keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
-    .login-container { background: white; padding: 3rem; border-radius: 30px; box-shadow: 0 20px 60px rgba(0,40,0,0.15); width: 100%; max-width: 420px; position: relative; z-index: 1; }
-    .login-container::before { content: '🌷'; position: absolute; top: -15px; right: 20px; font-size: 2.5rem; }
-    .logo { text-align: center; margin-bottom: 2rem; }
-    .logo i { font-size: 3rem; color: #1f4f2b; }
-    h2 { font-family: 'Merriweather', serif; color: #1f4f2b; text-align: center; margin-bottom: 2rem; }
-    .form-group { margin-bottom: 1.5rem; }
-    label { display: block; margin-bottom: 0.5rem; color: #2e3b2e; font-weight: 500; }
-    input { width: 100%; padding: 0.8rem; border: 2px solid #deecce; border-radius: 12px; font-size: 1rem; transition: border 0.3s; }
-    input:focus { outline: none; border-color: #1f4f2b; box-shadow: 0 0 0 3px rgba(31,79,43,0.1); }
-    .btn { width: 100%; background: linear-gradient(135deg, #e9b741 0%, #dda52d 100%); color: #1f4f2b; padding: 1rem; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s; }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(233,183,65,0.3); }
-    .links { text-align: center; margin-top: 1.5rem; }
-    .links a { color: #1f4f2b; text-decoration: none; font-weight: 500; }
-    .links a:hover { text-decoration: underline; }
-  </style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="login-container">
-    <div class="logo"><i class="fas fa-seedling"></i></div>
-    <h2>Welcome Back</h2>
-    <form id="loginForm">
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" required>
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo">
+        <i class="fas fa-seedling"></i>
+        <span>AgriLink Hub</span>
       </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" required>
+      <div class="nav-links">
+        <a href="far.html">Home</a>
+        <a href="resources.html">Resources</a>
+        <a href="marketplace.html">Marketplace</a>
+        <a href="experts.html">Crop Tool Guide</a>
+        <a href="initiatives.html">Initiatives</a>
+        <a href="login.html" class="btn btn-outline" style="color:#f5edda; border-color:#f5edda;">Login</a>
+        <a href="signup.html" class="btn" style="background:#f5edda; color:#1f4f2b;">Join</a>
       </div>
-      <button type="submit" class="btn">Login</button>
-    </form>
-    <div class="links">
-      <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
-      <p><a href="far.html">Back to Home</a></p>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <div>
+        <h1>Inspire society, empower farmers, connect sectors</h1>
+        <p>A digital ecosystem where farmers, experts, and communities grow together. Access resources, opportunities, and knowledge — all in one place.</p>
+        <div class="hero-buttons">
+          <a href="login.html?role=farmer" class="btn" style="background: #1f4f2b; color: white;">I'm a Farmer <i class="fas fa-arrow-right"></i></a>
+          <a href="login.html?role=public" class="btn btn-outline" style="border-color:#1f4f2b; color:#1f4f2b;">Explore as Public</a>
+        </div>
+      </div>
+      <div class="hero-image" title="Field of possibilities"></div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="section-title" style="margin-top: 4rem;">
+      <h2>Who we serve</h2>
+    </div>
+    <div class="roles-grid">
+      <div class="role-card" onclick="window.location.href='login.html?role=farmer'" style="cursor: pointer;">
+        <div class="role-icon"><i class="fas fa-tractor"></i></div>
+        <h3>Farmer</h3>
+        <p>Access resources, connect with buyers & experts, join initiatives to boost your livelihood.</p>
+        <span class="role-tag">3,200+ active</span>
+      </div>
+      <div class="role-card" onclick="window.location.href='login.html?role=admin'" style="cursor: pointer;">
+        <div class="role-icon"><i class="fas fa-user-shield"></i></div>
+        <h3>Admin</h3>
+        <p>Oversee content, verify experts, manage platform integrity and insights.</p>
+        <span class="role-tag">coordinators</span>
+      </div>
+    </div>
+
+    <div class="section-title" style="margin-top: 2rem;">
+      <h2>Platform pillars</h2>
+    </div>
+    <div class="features-grid">
+      <div class="feature-item">
+        <i class="fas fa-book-open"></i>
+        <h3>📚 Resource library</h3>
+        <p>Guides, videos, market prices, pest management — in multiple languages.</p>
+      </div>
+      <div class="feature-item">
+        <i class="fas fa-handshake"></i>
+        <h3>🤝 Expert connect</h3>
+        <p>Direct Q&A, consultations and verified advice from agricultural scientists.</p>
+      </div>
+      <div class="feature-item">
+        <i class="fas fa-store-alt"></i>
+        <h3>🌾 Sector marketplace</h3>
+        <p>Link farmers with buyers, suppliers, and fair-trade opportunities.</p>
+      </div>
+      <div class="feature-item">
+        <i class="fas fa-calendar-check"></i>
+        <h3>📅 Initiatives</h3>
+        <p>Government schemes, workshops, funding, and collective projects.</p>
+      </div>
     </div>
   </div>
-  <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const role = urlParams.get('role');
-    
-    document.getElementById('loginForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      
-      // Check credentials from localStorage
-      const users = JSON.parse(localStorage.getItem('users') || '[]');
-      const user = users.find(u => u.email === email && u.password === password);
-      
-      if (!user) {
-        alert('❌ Invalid email or password! Please sign up first.');
-        return;
-      }
-      
-      // Set session storage
-      sessionStorage.setItem('isLoggedIn', 'true');
-      sessionStorage.setItem('userRole', user.role);
-      sessionStorage.setItem('userName', user.name);
-      
-      alert('✅ Login successful! Redirecting...');
-      
-      const dashboards = {
-        'farmer': 'tool-booking.html',
-        'expert': 'expert-dashboard.html',
-        'admin': 'admin-portal.html',
-        'public': 'public-dashboard.html'
-      };
-      
-      const dashboard = dashboards[user.role] || 'far.html';
-      setTimeout(() => window.location.href = dashboard, 1000);
-    });
-  </script>
+
+  <section class="resource-showcase">
+    <div class="container">
+      <div class="section-title" style="margin-bottom: 2rem;">
+        <h2>From the library</h2>
+        <p style="color: #3f5a3f;">Free knowledge for every farmer</p>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1625246333195-78d9c38ad449?w=400&h=250&fit=crop'); height: 200px;"></div>
+          <div class="card-content">
+            <h4>Soil health quick guide</h4>
+            <div class="meta"><i class="fas fa-user-graduate"></i> Dr. Amina Diallo · 3 days ago</div>
+            <p>Simple tests to improve yield naturally.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=400&h=250&fit=crop'); height: 200px;"></div>
+          <div class="card-content">
+            <h4>Market prices: maize</h4>
+            <div class="meta"><i class="fas fa-chart-line"></i> updated hourly</div>
+            <p>Best mandis and price trends in your region.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=250&fit=crop'); height: 200px;"></div>
+          <div class="card-content">
+            <h4>Natural pest control</h4>
+            <div class="meta"><i class="fas fa-video"></i> video + article</div>
+            <p>Low-cost methods used by 500+ farmers.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1595855759920-86582396756a?w=400&h=250&fit=crop'); height: 200px;"></div>
+          <div class="card-content">
+            <h4>Women in farming</h4>
+            <div class="meta"><i class="fas fa-microphone"></i> podcast</div>
+            <p>Stories and cooperative opportunities.</p>
+          </div>
+        </div>
+      </div>
+      <div style="text-align: center; margin: 2.5rem 0 0.5rem;">
+        <a href="resources.html" class="demo-alert-btn" style="text-decoration: none;"><i class="fas fa-search"></i> Browse all resources</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="cta-banner">
+    <h2>Farming feeds the world — be part of the story</h2>
+    <p style="max-width: 700px; margin: 0 auto 1.5rem;">Explore articles, success stories, and volunteer opportunities. Anyone can learn and contribute.</p>
+    <a href="login.html?role=public" class="btn">Explore as Public</a>
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <i class="fas fa-seedling"></i> <strong>AgriLink Hub</strong>
+          <p>Inspiring society, empowering farmers since 2025.</p>
+        </div>
+        <div class="footer-col">
+          <h4>For farmers</h4>
+          <p>Resources · Expert advice · Market</p>
+        </div>
+        <div class="footer-col">
+          <h4>For experts</h4>
+          <p>Create content · Guide farmers</p>
+        </div>
+        <div class="footer-col">
+          <h4>Admin</h4>
+          <p>Content management · Insights</p>
+        </div>
+        <div class="footer-col">
+          <i class="fas fa-globe"></i> English (expand)<br>
+          <i class="fas fa-phone"></i> help@agrilinkhub.org
+        </div>
+      </div>
+      <div class="copyright">
+        <p>© 2025 AgriLink Hub – Bridging farmers, experts, and society. All rights reserved.</p>
+        <p style="font-size:0.8rem;">Demo prototype for inspirational concept. Data shown is illustrative.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
