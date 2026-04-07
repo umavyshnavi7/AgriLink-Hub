@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useEffect } from 'react';
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -26,12 +27,30 @@ export default function Navbar() {
             </>
           ) : user.isLoggedIn && user.role === 'farmer' ? (
             <>
-              <Link to="/" style={styles.link}>Home</Link>
               <Link to="/resources" style={styles.link}>Resources</Link>
               <Link to="/marketplace" style={styles.link}>Marketplace</Link>
               <Link to="/ai-expert" style={styles.link}>AI Expert</Link>
               <Link to="/initiatives" style={styles.link}>Initiatives</Link>
-              <Link to="/farmer" style={styles.link}>🚜 Rental Tools</Link>
+              <Link to="/farmer" style={{ ...styles.link, ...styles.highlight }}>🚜 Rental Tools</Link>
+              <span style={styles.userName}>👤 {user.name}</span>
+              <button onClick={handleLogout} style={styles.btn}>Logout</button>
+            </>
+          ) : user.isLoggedIn && user.role === 'expert' ? (
+            <>
+              <Link to="/expert" style={styles.link}>👨🔬 My Dashboard</Link>
+              <Link to="/resources" style={styles.link}>Resources</Link>
+              <Link to="/ai-expert" style={styles.link}>AI Expert</Link>
+              <Link to="/initiatives" style={styles.link}>Initiatives</Link>
+              <span style={styles.userName}>👤 {user.name}</span>
+              <button onClick={handleLogout} style={styles.btn}>Logout</button>
+            </>
+          ) : user.isLoggedIn && user.role === 'public' ? (
+            <>
+              <Link to="/public" style={styles.link}>🌍 Explore</Link>
+              <Link to="/resources" style={styles.link}>Resources</Link>
+              <Link to="/marketplace" style={styles.link}>Marketplace</Link>
+              <Link to="/ai-expert" style={styles.link}>AI Expert</Link>
+              <Link to="/initiatives" style={styles.link}>Initiatives</Link>
               <span style={styles.userName}>👤 {user.name}</span>
               <button onClick={handleLogout} style={styles.btn}>Logout</button>
             </>
@@ -67,6 +86,7 @@ const styles = {
   logo: { color: 'white', textDecoration: 'none', fontSize: '1.5rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem' },
   links: { display: 'flex', gap: '1.5rem', alignItems: 'center', flexWrap: 'wrap' },
   link: { color: '#f0f7e6', textDecoration: 'none', fontWeight: 500 },
+  highlight: { background: '#e9b741', color: '#1f4f2b', padding: '0.4rem 1rem', borderRadius: 40, fontWeight: 700 },
   btn: { background: '#e9b741', color: '#1f4f2b', padding: '0.5rem 1.2rem', borderRadius: 40, fontWeight: 600, textDecoration: 'none', border: 'none', cursor: 'pointer', fontSize: '0.95rem' },
   btnOutline: { background: 'transparent', border: '2px solid #f5edda', color: '#f5edda' },
   userName: { color: '#f5edda', fontWeight: 500, fontSize: '0.9rem' }

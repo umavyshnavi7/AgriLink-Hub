@@ -58,8 +58,10 @@ export default function Signup() {
             <label style={s.label}>I am a</label>
             <select style={s.input} required value={form.role} onChange={e => setForm(f => ({ ...f, role: e.target.value }))}>
               <option value="">Select your role</option>
-              <option value="farmer">Farmer</option>
-              <option value="admin">Admin</option>
+              <option value="farmer">🚜 Farmer — Access tools, resources & marketplace</option>
+              <option value="expert">👨‍🔬 Agricultural Expert — Guide farmers & create content</option>
+              <option value="public">🌍 Public — Explore farming content & discussions</option>
+              <option value="admin">🛡️ Admin — Manage platform & bookings</option>
             </select>
           </div>
           <div style={s.group}>

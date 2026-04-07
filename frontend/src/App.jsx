@@ -14,6 +14,8 @@ import ResourceDetail from './pages/ResourceDetail';
 import Marketplace from './pages/Marketplace';
 import Initiatives from './pages/Initiatives';
 import AdminPortal from './pages/AdminPortal';
+import ExpertDashboard from './pages/ExpertDashboard';
+import PublicDashboard from './pages/PublicDashboard';
 
 export default function App() {
   return (
@@ -50,6 +52,12 @@ export default function App() {
           } />
           <Route path="/farmer" element={
             <ProtectedRoute allowedRoles={['farmer']}><FarmerDashboard /></ProtectedRoute>
+          } />
+          <Route path="/expert" element={
+            <ProtectedRoute allowedRoles={['expert']}><ExpertDashboard /></ProtectedRoute>
+          } />
+          <Route path="/public" element={
+            <ProtectedRoute allowedRoles={['public']}><PublicDashboard /></ProtectedRoute>
           } />
 
           {/* Fallback */}

@@ -121,7 +121,7 @@ export const AuthService = {
   getEmail: () => sessionStorage.getItem('userEmail'),
 
   getDashboard(role) {
-    const map = { farmer: '/farmer', expert: '/expert-dashboard', admin: '/admin', public: '/public-dashboard' };
+    const map = { farmer: '/farmer', expert: '/expert', admin: '/admin', public: '/public' };
     return map[role] || '/';
   }
 };
