@@ -16,6 +16,7 @@ import Initiatives from './pages/Initiatives';
 import AdminPortal from './pages/AdminPortal';
 import ExpertDashboard from './pages/ExpertDashboard';
 import PublicDashboard from './pages/PublicDashboard';
+import ExpertContentDetail from './pages/ExpertContentDetail';
 
 export default function App() {
   return (
@@ -46,6 +47,9 @@ export default function App() {
           } />
           <Route path="/resources/:slug" element={
             <ProtectedRoute><ResourceDetail /></ProtectedRoute>
+          } />
+          <Route path="/resources/expert/:id" element={
+            <ProtectedRoute><ExpertContentDetail /></ProtectedRoute>
           } />
           <Route path="/ai-expert" element={
             <ProtectedRoute><AiExpert /></ProtectedRoute>

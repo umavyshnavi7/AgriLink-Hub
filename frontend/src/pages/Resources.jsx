@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-const resources = [
+const staticResources = [
   { slug: 'soil-health',          icon: '🌱', color: '#4c7a4c', title: 'Soil Health Management',         meta: 'Guide • 15 min read', desc: 'Learn soil testing, pH balance, organic matter, and nutrient management for better yields.' },
   { slug: 'water-conservation',   icon: '💧', color: '#2b7a2b', title: 'Water Conservation Techniques',   meta: 'Guide • 20 min read', desc: 'Drip irrigation, rainwater harvesting, and efficient water usage methods.' },
   { slug: 'pest-control',         icon: '🐛', color: '#8B5A2B', title: 'Organic Pest Control',             meta: 'Guide • 12 min read', desc: 'Natural pest management using neem, companion planting, and biological controls.' },
@@ -15,8 +15,16 @@ const resources = [
   { slug: 'digital-tools',        icon: '📱', color: '#9370db', title: 'Digital Tools for Farmers',       meta: 'Guide • 18 min read', desc: 'Mobile apps for weather, market prices, soil testing, and expert advice.' },
 ];
 
+const categoryColors = {
+  'Soil Health': '#4c7a4c', 'Pest Control': '#8B5A2B', 'Irrigation': '#2b7a2b',
+  'Crop Planning': '#e9b741', 'Fertilizers': '#c44545', 'Weather': '#4a90e2',
+  'Market': '#20b2aa', 'Organic Farming': '#32cd32'
+};
+
 export default function Resources() {
   const navigate = useNavigate();
+  const expertContents = JSON.parse(localStorage.getItem('expertContents') || '[]');
+
   return (
     <div style={{ maxWidth: 1280, margin: '2rem auto', padding: '0 2rem' }}>
       <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
@@ -24,8 +32,45 @@ export default function Resources() {
         <p style={{ color: '#3f5a3f', fontSize: '1.1rem' }}>Free guides, videos, and expert knowledge for every farmer</p>
       </div>
 
+      {/* Expert Published Content */}
+      {expertContents.length > 0 && (
+        <>
+          <h2 style={{ color: '#1a3a5c', marginBottom: '1.5rem', fontSize: '1.5rem' }}>👨🔬 Expert Published Content</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem', marginBottom: '3rem' }}>
+            {expertContents.map((c) => (
+              <div key={c.id} style={{ background: 'white', borderRadius: 20, overflow: 'hidden', boxShadow: '0 8px 24px rgba(0,32,0,0.1)', transition: 'transform 0.2s', cursor: 'default' }}
+                onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-5px)'}
+                onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
+              >
+                <div style={{ background: categoryColors[c.category] || '#1a3a5c', height: 100, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '3rem' }}>
+                  👨🔬
+                </div>
+                <div style={{ padding: '1.5rem' }}>
+                  <h4 style={{ color: '#1d4b1d', marginBottom: '0.4rem', fontSize: '1.1rem' }}>{c.title}</h4>
+                  <div style={{ fontSize: '0.85rem', color: '#6a7e6a', marginBottom: '0.8rem' }}>
+                    👤 {c.author} · {c.date} · {c.category}
+                  </div>
+                  <p style={{ color: '#364a36', fontSize: '0.95rem', marginBottom: '1.2rem', lineHeight: 1.6 }}>
+                    {c.content.substring(0, 120)}{c.content.length > 120 ? '...' : ''}
+                  </p>
+                  <button
+                    onClick={() => navigate(`/resources/expert/${c.id}`)}
+                    style={{ background: '#1a3a5c', color: 'white', border: 'none', padding: '0.6rem 1.4rem', borderRadius: 40, cursor: 'pointer', fontWeight: 600, fontSize: '0.9rem' }}
+                  >
+                    Read More →
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+          <hr style={{ border: 'none', borderTop: '2px solid #deecce', marginBottom: '3rem' }} />
+        </>
+      )}
+
+      {/* Static Guides */}
+      <h2 style={{ color: '#1d4b1d', marginBottom: '1.5rem', fontSize: '1.5rem' }}>📖 Farming Guides</h2>
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
-        {resources.map((r) => (
+        {staticResources.map((r) => (
           <div key={r.title} style={{ background: 'white', borderRadius: 20, overflow: 'hidden', boxShadow: '0 8px 24px rgba(0,32,0,0.1)', transition: 'transform 0.2s', cursor: 'pointer' }}
             onMouseEnter={e => e.currentTarget.style.transform = 'translateY(-5px)'}
             onMouseLeave={e => e.currentTarget.style.transform = 'translateY(0)'}
