@@ -27,11 +27,11 @@ export default function Navbar() {
           ) : user.isLoggedIn && user.role === 'farmer' ? (
             <>
               <Link to="/" style={styles.link}>Home</Link>
-              <Link to="/farmer" style={styles.link}>🚜 Rental Tools</Link>
               <Link to="/resources" style={styles.link}>Resources</Link>
               <Link to="/marketplace" style={styles.link}>Marketplace</Link>
               <Link to="/ai-expert" style={styles.link}>AI Expert</Link>
               <Link to="/initiatives" style={styles.link}>Initiatives</Link>
+              <Link to="/farmer" style={styles.link}>🚜 Rental Tools</Link>
               <span style={styles.userName}>👤 {user.name}</span>
               <button onClick={handleLogout} style={styles.btn}>Logout</button>
             </>
