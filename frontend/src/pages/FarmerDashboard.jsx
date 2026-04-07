@@ -19,6 +19,8 @@ export default function FarmerDashboard() {
   const [modal, setModal] = useState({ open: false, tool: null });
   const [form, setForm] = useState(emptyForm);
   const [myBookings, setMyBookings] = useState(() => JSON.parse(localStorage.getItem('equipmentBookings') || '[]').filter(b => b.farmerName === user.name));
+  const [question, setQuestion] = useState('');
+  const [myQuestions, setMyQuestions] = useState(() => JSON.parse(localStorage.getItem('farmerQuestions') || '[]').filter(q => q.farmer === user.name));
 
   const openModal = (tool) => { setModal({ open: true, tool }); setForm(emptyForm); };
   const closeModal = () => setModal({ open: false, tool: null });
@@ -45,6 +47,18 @@ export default function FarmerDashboard() {
     setMyBookings(all.filter(b => b.farmerName === user.name));
     showToast(`✅ Booking request sent for ${modal.tool.name}!`, 'success');
     closeModal();
+  };
+
+  const handleAskQuestion = (e) => {
+    e.preventDefault();
+    if (!question.trim()) return;
+    const q = { farmer: user.name, question: question.trim(), time: new Date().toLocaleString(), answered: false };
+    const all = JSON.parse(localStorage.getItem('farmerQuestions') || '[]');
+    all.unshift(q);
+    localStorage.setItem('farmerQuestions', JSON.stringify(all));
+    setMyQuestions(all.filter(q => q.farmer === user.name));
+    setQuestion('');
+    showToast('✅ Question sent to experts!', 'success');
   };
 
   return (
@@ -111,6 +125,41 @@ export default function FarmerDashboard() {
             </button>
           </div>
         ))}
+      </div>
+
+      {/* Ask Expert Section */}
+      <div style={{ background: 'white', padding: '2rem', borderRadius: 20, marginBottom: '2rem', boxShadow: '0 5px 15px rgba(0,0,0,0.08)' }}>
+        <h2 style={{ color: '#1f4f2b', marginBottom: '0.5rem' }}>👨🔬 Ask an Agricultural Expert</h2>
+        <p style={{ color: '#6a7e6a', marginBottom: '1.2rem', fontSize: '0.9rem' }}>Your question will be answered by a verified expert within 24 hours</p>
+        <form onSubmit={handleAskQuestion} style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
+          <input
+            style={{ flex: 1, minWidth: 200, padding: '0.8rem', border: '2px solid #deecce', borderRadius: 12, fontSize: '1rem', boxSizing: 'border-box' }}
+            placeholder="e.g. What fertilizer is best for sandy soil wheat?"
+            value={question}
+            onChange={e => setQuestion(e.target.value)}
+          />
+          <button type="submit" style={{ background: '#1f4f2b', color: 'white', border: 'none', padding: '0.8rem 1.8rem', borderRadius: 12, fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap' }}>
+            📨 Send Question
+          </button>
+        </form>
+
+        {/* My Questions */}
+        {myQuestions.length > 0 && (
+          <div style={{ marginTop: '1.5rem' }}>
+            <h4 style={{ color: '#1f4f2b', marginBottom: '1rem' }}>My Questions</h4>
+            {myQuestions.map((q, i) => (
+              <div key={i} style={{ background: '#f9f7eb', padding: '1rem', borderRadius: 12, marginBottom: '0.8rem', borderLeft: `4px solid ${q.answered ? '#2b7a2b' : '#e9b741'}` }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.3rem' }}>
+                  <p style={{ margin: 0, color: '#364a36', fontWeight: 500 }}>{q.question}</p>
+                  <span style={{ background: q.answered ? '#2b7a2b' : '#e9b741', color: q.answered ? 'white' : '#1f4f2b', padding: '0.2rem 0.8rem', borderRadius: 20, fontSize: '0.8rem', fontWeight: 600, whiteSpace: 'nowrap' }}>
+                    {q.answered ? '✅ Answered' : '⏳ Pending'}
+                  </span>
+                </div>
+                <span style={{ color: '#888', fontSize: '0.8rem' }}>{q.time}</span>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* My Bookings */}

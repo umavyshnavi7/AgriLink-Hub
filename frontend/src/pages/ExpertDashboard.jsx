@@ -11,11 +11,14 @@ export default function ExpertDashboard() {
   const [contents, setContents] = useState(() => JSON.parse(localStorage.getItem('expertContents') || '[]'));
   const [form, setForm] = useState(emptyContent);
   const [editId, setEditId] = useState(null);
-  const [questions] = useState([
-    { farmer: 'Rajesh Kumar', question: 'What is the best fertilizer for sandy soil wheat crop?', time: '2 hours ago' },
-    { farmer: 'Priya Sharma', question: 'How to control aphids organically in cotton?', time: '5 hours ago' },
-    { farmer: 'Suresh Patel', question: 'When should I start drip irrigation for tomatoes?', time: '1 day ago' },
-  ]);
+  const [questions, setQuestions] = useState(() => JSON.parse(localStorage.getItem('farmerQuestions') || '[]').length > 0
+    ? JSON.parse(localStorage.getItem('farmerQuestions') || '[]')
+    : [
+        { farmer: 'Rajesh Kumar', question: 'What is the best fertilizer for sandy soil wheat crop?', time: '2 hours ago', answered: false },
+        { farmer: 'Priya Sharma', question: 'How to control aphids organically in cotton?', time: '5 hours ago', answered: false },
+        { farmer: 'Suresh Patel', question: 'When should I start drip irrigation for tomatoes?', time: '1 day ago', answered: false },
+      ]
+  );
   const [answered, setAnswered] = useState([]);
   const [answer, setAnswer] = useState({ open: false, index: null, text: '' });
 
@@ -56,6 +59,10 @@ export default function ExpertDashboard() {
     if (!answer.text.trim()) { showToast('Please write an answer.', 'error'); return; }
     showToast(`Answer sent to ${questions[i].farmer}!`, 'success');
     setAnswered(prev => [...prev, i]);
+    // Mark as answered in localStorage
+    const all = JSON.parse(localStorage.getItem('farmerQuestions') || '[]');
+    const idx = all.findIndex(q => q.farmer === questions[i].farmer && q.question === questions[i].question);
+    if (idx !== -1) { all[idx].answered = true; localStorage.setItem('farmerQuestions', JSON.stringify(all)); }
     setAnswer({ open: false, index: null, text: '' });
   };
 
