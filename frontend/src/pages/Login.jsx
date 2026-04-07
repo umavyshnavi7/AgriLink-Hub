@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthService } from '../services/api';
 import { useAuth } from '../context/AuthContext';
@@ -11,16 +11,21 @@ function generateCaptcha() {
 
 export default function Login() {
   const [form, setForm] = useState({ email: '', password: '', captcha: '' });
-  const [captchaCode, setCaptchaCode] = useState(generateCaptcha());
+  const captchaRef = useRef(generateCaptcha());
+  const [captchaDisplay, setCaptchaDisplay] = useState(captchaRef.current);
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const refreshCaptcha = () => { setCaptchaCode(generateCaptcha()); setForm(f => ({ ...f, captcha: '' })); };
+  const refreshCaptcha = () => {
+    captchaRef.current = generateCaptcha();
+    setCaptchaDisplay(captchaRef.current);
+    setForm(f => ({ ...f, captcha: '' }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (form.captcha.toUpperCase() !== captchaCode) {
+    if (form.captcha.trim().toUpperCase() !== captchaRef.current) {
       showToast('Incorrect CAPTCHA! Please try again.', 'error');
       refreshCaptcha();
       return;
@@ -29,8 +34,8 @@ export default function Login() {
     try {
       const data = await AuthService.login(form.email, form.password);
       login(data);
-      showToast('Login successful! Redirecting...', 'success');
-      setTimeout(() => navigate(AuthService.getDashboard(data.role)), 1200);
+      showToast('Login successful!', 'success');
+      navigate(AuthService.getDashboard(data.role), { replace: true });
     } catch (err) {
       showToast(err.message, 'error');
       refreshCaptcha();
@@ -56,7 +61,7 @@ export default function Login() {
           <div style={styles.group}>
             <label style={styles.label}>Verify you're human</label>
             <div style={styles.captchaBox}>
-              <span style={styles.captchaCode}>{captchaCode}</span>
+              <span style={styles.captchaCode}>{captchaDisplay}</span>
               <input style={styles.captchaInput} type="text" placeholder="Enter letters" autoComplete="off" required value={form.captcha} onChange={e => setForm(f => ({ ...f, captcha: e.target.value }))} />
               <button type="button" onClick={refreshCaptcha} style={styles.captchaRefresh}>🔄</button>
             </div>

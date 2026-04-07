@@ -1,0 +1,10 @@
+package com.agrilink.repository;
+
+import com.agrilink.model.Tool;
+import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
+
+public interface ToolRepository extends JpaRepository<Tool, Long> {
+    List<Tool> findByCategory(String category);
+    List<Tool> findByStockGreaterThan(int stock);
+}

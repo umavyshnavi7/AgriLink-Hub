@@ -9,6 +9,11 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import AiExpert from './pages/AiExpert';
 import FarmerDashboard from './pages/FarmerDashboard';
+import Resources from './pages/Resources';
+import ResourceDetail from './pages/ResourceDetail';
+import Marketplace from './pages/Marketplace';
+import Initiatives from './pages/Initiatives';
+import AdminPortal from './pages/AdminPortal';
 
 export default function App() {
   return (
@@ -22,6 +27,21 @@ export default function App() {
           <Route path="/signup" element={<Signup />} />
 
           {/* Protected Routes */}
+          <Route path="/admin" element={
+            <ProtectedRoute allowedRoles={['admin']}><AdminPortal /></ProtectedRoute>
+          } />
+          <Route path="/initiatives" element={
+            <ProtectedRoute><Initiatives /></ProtectedRoute>
+          } />
+          <Route path="/marketplace" element={
+            <ProtectedRoute><Marketplace /></ProtectedRoute>
+          } />
+          <Route path="/resources" element={
+            <ProtectedRoute><Resources /></ProtectedRoute>
+          } />
+          <Route path="/resources/:slug" element={
+            <ProtectedRoute><ResourceDetail /></ProtectedRoute>
+          } />
           <Route path="/ai-expert" element={
             <ProtectedRoute><AiExpert /></ProtectedRoute>
           } />

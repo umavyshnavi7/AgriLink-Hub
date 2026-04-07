@@ -5,10 +5,10 @@ const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(() => ({
-    isLoggedIn: AuthService.isLoggedIn(),
-    role: AuthService.getRole(),
-    name: AuthService.getName(),
-    email: AuthService.getEmail()
+    isLoggedIn: !!sessionStorage.getItem('isLoggedIn'),
+    role: sessionStorage.getItem('userRole'),
+    name: sessionStorage.getItem('userName'),
+    email: sessionStorage.getItem('userEmail'),
   }));
 
   const login = (data) => {
@@ -17,7 +17,7 @@ export function AuthProvider({ children }) {
   };
 
   const logout = () => {
-    AuthService.logout();
+    sessionStorage.clear();
     setUser({ isLoggedIn: false, role: null, name: null, email: null });
   };
 

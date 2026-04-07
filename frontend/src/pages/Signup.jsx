@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthService } from '../services/api';
 import { showToast } from '../components/Toast';
@@ -10,15 +10,20 @@ function generateCaptcha() {
 
 export default function Signup() {
   const [form, setForm] = useState({ name: '', email: '', password: '', role: '', captcha: '' });
-  const [captchaCode, setCaptchaCode] = useState(generateCaptcha());
+  const captchaRef = useRef(generateCaptcha());
+  const [captchaDisplay, setCaptchaDisplay] = useState(captchaRef.current);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const refreshCaptcha = () => { setCaptchaCode(generateCaptcha()); setForm(f => ({ ...f, captcha: '' })); };
+  const refreshCaptcha = () => {
+    captchaRef.current = generateCaptcha();
+    setCaptchaDisplay(captchaRef.current);
+    setForm(f => ({ ...f, captcha: '' }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (form.captcha.toUpperCase() !== captchaCode) {
+    if (form.captcha.trim().toUpperCase() !== captchaRef.current) {
       showToast('Incorrect CAPTCHA! Please try again.', 'error');
       refreshCaptcha();
       return;
@@ -60,7 +65,7 @@ export default function Signup() {
           <div style={s.group}>
             <label style={s.label}>Verify you're human</label>
             <div style={s.captchaBox}>
-              <span style={s.captchaCode}>{captchaCode}</span>
+              <span style={s.captchaCode}>{captchaDisplay}</span>
               <input style={s.captchaInput} type="text" placeholder="Enter letters" autoComplete="off" required value={form.captcha} onChange={e => setForm(f => ({ ...f, captcha: e.target.value }))} />
               <button type="button" onClick={refreshCaptcha} style={s.captchaRefresh}>🔄</button>
             </div>

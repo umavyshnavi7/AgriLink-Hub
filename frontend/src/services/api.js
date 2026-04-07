@@ -126,4 +126,26 @@ export const AuthService = {
   }
 };
 
+// ─── Tools Service ────────────────────────────────────────────────────────────
+export const ToolService = {
+  getAll:    ()         => api.get('/tools').then(r => r.data),
+  create:    (tool)     => api.post('/tools', tool).then(r => r.data),
+  update:    (id, tool) => api.put(`/tools/${id}`, tool).then(r => r.data),
+  remove:    (id)       => api.delete(`/tools/${id}`).then(r => r.data),
+};
+
+// ─── Booking Service ──────────────────────────────────────────────────────────
+export const BookingService = {
+  getAll:          ()           => api.get('/bookings').then(r => r.data),
+  getByFarmer:     (farmerId)   => api.get(`/bookings/farmer/${farmerId}`).then(r => r.data),
+  create:          (booking)    => api.post('/bookings', booking).then(r => r.data),
+  updateStatus:    (id, status) => api.patch(`/bookings/${id}/status`, { status }).then(r => r.data),
+};
+
+// ─── Buyer Service ────────────────────────────────────────────────────────────
+export const BuyerService = {
+  getAll:      () => api.get('/buyers').then(r => r.data),
+  getVerified: () => api.get('/buyers/verified').then(r => r.data),
+};
+
 export default api;
