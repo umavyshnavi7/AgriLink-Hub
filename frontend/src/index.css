@@ -1,0 +1,4 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', 'Segoe UI', sans-serif; background: #fefef7; color: #2e3b2e; line-height: 1.5; }
+a { color: inherit; }
+button { font-family: inherit; }

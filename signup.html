@@ -26,6 +26,10 @@
     .links { text-align: center; margin-top: 1.5rem; }
     .links a { color: #1f4f2b; text-decoration: none; font-weight: 500; }
     .links a:hover { text-decoration: underline; }
+    .captcha-box { background: #f9f7eb; border: 2px solid #deecce; border-radius: 12px; padding: 1rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.8rem; overflow: hidden; }
+    .captcha-canvas { border-radius: 8px; background: #1f4f2b; letter-spacing: 3px; font-size: 1.1rem; font-weight: 700; color: white; padding: 0.4rem 0.7rem; font-family: 'Courier New', monospace; user-select: none; flex-shrink: 0; white-space: nowrap; }
+    .captcha-input { flex: 1; min-width: 0; width: auto !important; padding: 0.5rem; border: 2px solid #deecce; border-radius: 8px; font-size: 0.95rem; text-align: center; }
+    .captcha-refresh { background: none; border: none; cursor: pointer; color: #1f4f2b; font-size: 1.1rem; flex-shrink: 0; padding: 0; }
   </style>
 </head>
 <body>
@@ -53,6 +57,14 @@
         <label for="password">Password</label>
         <input type="password" id="password" required>
       </div>
+      <div class="form-group">
+        <label>Verify you're human</label>
+        <div class="captcha-box">
+          <span class="captcha-canvas" id="captchaQuestion"></span>
+          <input type="text" class="captcha-input" id="captchaAnswer" placeholder="Enter letters" required autocomplete="off">
+          <button type="button" class="captcha-refresh" onclick="generateCaptcha()" title="Refresh"><i class="fas fa-sync-alt"></i></button>
+        </div>
+      </div>
       <button type="submit" class="btn">Sign Up</button>
     </form>
     <div class="links">
@@ -60,28 +72,43 @@
       <p><a href="far.html">Back to Home</a></p>
     </div>
   </div>
+  <script src="api.js"></script>
   <script>
-    document.getElementById('signupForm').addEventListener('submit', (e) => {
+    let captchaResult = '';
+    function generateCaptcha() {
+      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      captchaResult = Array.from({length: 6}, () => chars[Math.floor(Math.random() * chars.length)]).join('');
+      document.getElementById('captchaQuestion').textContent = captchaResult;
+      document.getElementById('captchaAnswer').value = '';
+    }
+    generateCaptcha();
+
+    document.getElementById('signupForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
-      const role = document.getElementById('role').value;
-      const name = document.getElementById('name').value;
-      
-      // Save user to localStorage
-      const users = JSON.parse(localStorage.getItem('users') || '[]');
-      
-      // Check if user already exists
-      if (users.find(u => u.email === email)) {
-        alert('❌ Email already registered! Please login.');
+      const btn = e.target.querySelector('button[type="submit"]');
+
+      const captchaAnswer = document.getElementById('captchaAnswer').value.toUpperCase();
+      if (captchaAnswer !== captchaResult) {
+        showToast('Incorrect CAPTCHA! Please try again.', 'error');
+        generateCaptcha();
         return;
       }
-      
-      users.push({ email, password, role, name });
-      localStorage.setItem('users', JSON.stringify(users));
-      
-      alert('✅ Account created successfully! Redirecting to login...');
-      setTimeout(() => window.location.href = `login.html?role=${role}`, 1000);
+
+      const name     = document.getElementById('name').value.trim();
+      const email    = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const role     = document.getElementById('role').value;
+
+      setLoading(btn, true);
+      try {
+        await AuthService.signup(name, email, password, role);
+        showToast('Account created! Redirecting to login...', 'success');
+        setTimeout(() => window.location.href = `login.html?role=${role}`, 1200);
+      } catch (err) {
+        showToast(err.message, 'error');
+        generateCaptcha();
+        setLoading(btn, false);
+      }
     });
   </script>
 </body>

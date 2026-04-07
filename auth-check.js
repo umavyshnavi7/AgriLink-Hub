@@ -1,34 +1,28 @@
 // Authentication check for protected pages
 (function() {
-  // Check if user is logged in
-  const isLoggedIn = sessionStorage.getItem('isLoggedIn');
-  const userRole = sessionStorage.getItem('userRole');
-  
-  // Get current page
   const currentPage = window.location.pathname.split('/').pop();
-  
-  // List of protected pages
+
   const protectedPages = [
-    'resources.html',
-    'marketplace.html',
-    'market-prices.html',
-    'experts.html',
-    'initiatives.html',
-    'crop-management.html',
-    'farmer-dashboard.html',
-    'farmer-features.html',
-    'expert-dashboard.html',
-    'admin-dashboard.html',
-    'admin-portal.html',
-    'tool-booking.html',
-    'public-dashboard.html'
+    'resources.html', 'marketplace.html', 'market-prices.html',
+    'experts.html', 'ai-expert.html', 'initiatives.html',
+    'crop-management.html', 'farmer-dashboard.html', 'farmer-features.html',
+    'expert-dashboard.html', 'admin-dashboard.html', 'admin-portal.html',
+    'tool-booking.html', 'public-dashboard.html'
   ];
-  
-  // Check if current page is protected
-  if (protectedPages.includes(currentPage)) {
-    if (!isLoggedIn) {
-      alert('⚠️ Please sign up or login to access this page.');
-      window.location.href = 'signup.html';
-    }
+
+  if (!protectedPages.includes(currentPage)) return;
+
+  const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+  if (!isLoggedIn) {
+    window.location.href = 'signup.html';
+    return;
+  }
+
+  // Check JWT token expiry if token exists
+  const token = sessionStorage.getItem('authToken');
+  const tokenExp = sessionStorage.getItem('tokenExp');
+  if (token && tokenExp && Date.now() / 1000 > parseInt(tokenExp)) {
+    sessionStorage.clear();
+    window.location.href = 'login.html?reason=expired';
   }
 })();

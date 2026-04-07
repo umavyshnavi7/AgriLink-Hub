@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Expert - AgriLink Hub</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .chat-container { max-width: 800px; margin: 2rem auto; background: white; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); overflow: hidden; }
+    .chat-header { background: linear-gradient(135deg, #1f4f2b 0%, #2b7a2b 100%); color: white; padding: 1.5rem; text-align: center; }
+    .chat-messages { height: 500px; overflow-y: auto; padding: 1.5rem; background: #f9f7eb; }
+    .message { margin-bottom: 1rem; display: flex; gap: 0.5rem; }
+    .message.user { flex-direction: row-reverse; }
+    .message-content { max-width: 70%; padding: 1rem; border-radius: 15px; }
+    .message.bot .message-content { background: white; border: 2px solid #deecce; }
+    .message.user .message-content { background: #1f4f2b; color: white; }
+    .chat-input { display: flex; padding: 1rem; background: white; border-top: 2px solid #deecce; }
+    .chat-input input { flex: 1; padding: 0.8rem; border: 2px solid #deecce; border-radius: 12px; font-size: 1rem; }
+    .chat-input button { margin-left: 0.5rem; padding: 0.8rem 1.5rem; background: #1f4f2b; color: white; border: none; border-radius: 12px; cursor: pointer; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <script>
+    if (!sessionStorage.getItem('isLoggedIn')) {
+      alert('⚠️ Please sign up or login to access this page.');
+      window.location.href = 'signup.html';
+    }
+  </script>
+  <nav class="navbar">
+    <div class="container">
+      <div class="logo"><i class="fas fa-seedling"></i><span>AgriLink Hub</span></div>
+      <div class="nav-links">
+        <a href="far.html">Home</a>
+        <a href="#" onclick="sessionStorage.clear(); window.location.href='far.html'" class="btn">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    <div class="chat-container">
+      <div class="chat-header">
+        <h2><i class="fas fa-robot"></i> AI Agricultural Expert</h2>
+        <p>Ask me anything about farming, crops, pests, or soil health</p>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="message bot">
+          <div class="message-content">
+            <strong>🤖 AI Expert:</strong><br>
+            Hello! I'm your AI agricultural assistant. How can I help you today?
+          </div>
+        </div>
+      </div>
+      <div class="chat-input">
+        <input type="text" id="userInput" placeholder="Ask your farming question..." onkeypress="if(event.key==='Enter') sendMessage()">
+        <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i> Send</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById('userInput');
+      const message = input.value.trim();
+      if (!message) return;
+
+      const chatMessages = document.getElementById('chatMessages');
+      
+      chatMessages.innerHTML += `
+        <div class="message user">
+          <div class="message-content"><strong>You:</strong><br>${message}</div>
+        </div>
+      `;
+
+      input.value = '';
+      
+      setTimeout(() => {
+        const response = getAIResponse(message);
+        chatMessages.innerHTML += `
+          <div class="message bot">
+            <div class="message-content"><strong>🤖 AI Expert:</strong><br>${response}</div>
+          </div>
+        `;
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }, 1000);
+    }
+
+    function getAIResponse(question) {
+      const q = question.toLowerCase();
+      
+      if (q.includes('pest') || q.includes('insect') || q.includes('bug')) {
+        return 'For pest control: 1) Neem oil spray (10ml/liter water), 2) Introduce ladybugs for aphids, 3) Yellow sticky traps for whiteflies, 4) Bacillus thuringiensis for caterpillars, 5) Crop rotation prevents buildup, 6) Remove infected plants immediately, 7) Spray early morning for best results. Common pests: Aphids, whiteflies, bollworms, stem borers.';
+      } else if (q.includes('soil') || q.includes('fertilizer') || q.includes('nutrient')) {
+        return 'Soil health tips: 1) NPK ratio - Vegetables: 19-19-19, Rice: 20-10-10, Wheat: 12-32-16, 2) Add 5-10 tons compost/hectare annually, 3) Test pH every 6 months (ideal 6-7), 4) Use vermicompost for organic matter, 5) Apply gypsum for saline soil, 6) Lime for acidic soil, 7) Micronutrients: Zinc, Boron, Iron as needed. Avoid over-fertilization!';
+      } else if (q.includes('water') || q.includes('irrigation') || q.includes('drip')) {
+        return 'Irrigation guide: 1) Drip irrigation saves 40-60% water, costs ₹50,000-80,000/acre, 2) Water requirement: Rice 1200-1500mm, Wheat 450-650mm, Cotton 700-1300mm, 3) Critical stages: Flowering, grain filling need most water, 4) Mulching reduces evaporation by 50%, 5) Rainwater harvesting: 1 acre catches 40,000 liters/inch rain, 6) Sprinkler for vegetables, 7) Check soil moisture 6 inches deep.';
+      } else if (q.includes('crop') || q.includes('plant') || q.includes('seed') || q.includes('variety')) {
+        return 'Crop selection: 1) Kharif (June-Oct): Rice, Cotton, Maize, Soybean, 2) Rabi (Nov-Mar): Wheat, Mustard, Chickpea, 3) Zaid (Mar-June): Watermelon, Cucumber, 4) High-yield varieties: Rice-IR64, Wheat-HD2967, Cotton-Bt varieties, 5) Seed rate: Rice 20-25kg/acre, Wheat 40-50kg/acre, 6) Spacing: Rice 20x15cm, Wheat 20-23cm rows, 7) Germination test before sowing.';
+      } else if (q.includes('price') || q.includes('market') || q.includes('sell') || q.includes('mandi')) {
+        return 'Market tips: 1) MSP 2024: Wheat ₹2125/quintal, Rice ₹2183/quintal, Cotton ₹6620/quintal, 2) Check daily mandi rates on agmarknet.gov.in, 3) Sell during festival seasons for 10-15% premium, 4) Join FPO/cooperatives for better bargaining, 5) Grade produce: A-grade gets 20% more, 6) Storage: Reduce 5-10% post-harvest loss, 7) Direct buyer contact via e-NAM portal.';
+      } else if (q.includes('disease') || q.includes('fungus') || q.includes('blight') || q.includes('rot')) {
+        return 'Disease management: 1) Fungal: Use Mancozeb, Copper oxychloride spray, 2) Bacterial: Streptocycline 9% + Copper 1%, 3) Viral: Remove infected plants, control vectors, 4) Preventive spray every 15 days in monsoon, 5) Seed treatment with Trichoderma, 6) Proper drainage prevents root rot, 7) Resistant varieties: Blast-resistant rice, Wilt-resistant tomato. Early detection is key!';
+      } else if (q.includes('weather') || q.includes('rain') || q.includes('temperature') || q.includes('climate')) {
+        return 'Weather management: 1) Check 7-day forecast before spraying, 2) Sow after 2-3 good rains (50mm+), 3) Heatwave (>40°C): Irrigate evening, use shade nets, 4) Frost protection: Smoke, sprinklers, cover crops, 5) Heavy rain: Ensure drainage, stake plants, 6) Drought: Mulch, drought-tolerant varieties, drip irrigation, 7) Use IMD Meghdoot app for agro-advisories.';
+      } else if (q.includes('organic') || q.includes('natural') || q.includes('chemical-free')) {
+        return 'Organic farming: 1) Certification: Apply through NPOP, takes 2-3 years, 2) Organic manure: FYM 10 tons/acre, Vermicompost 2 tons/acre, 3) Bio-pesticides: Neem, Pongamia, Bt, NPV, 4) Green manure: Dhaincha, Sunhemp before main crop, 5) Organic premium: 20-30% higher prices, 6) Composting: 3 months for farm waste, 7) Certification cost: ₹10,000-15,000/year. Growing market demand!';
+      } else if (q.includes('loan') || q.includes('subsidy') || q.includes('scheme') || q.includes('government')) {
+        return 'Government schemes: 1) PM-KISAN: ₹6,000/year direct transfer, 2) KCC loan: 7% interest, up to ₹3 lakh, 3) Drip irrigation subsidy: 55-90% depending on state, 4) Soil health card: Free testing, 5) Crop insurance: PMFBY covers 2% premium, 6) Solar pump subsidy: 60-90%, 7) FPO formation: ₹15 lakh grant. Visit pmkisan.gov.in, apply through CSC or bank.';
+      } else if (q.includes('storage') || q.includes('warehouse') || q.includes('godown')) {
+        return 'Storage solutions: 1) Moisture: Keep below 12% for grains, 2) Hermetic bags prevent insect damage, 3) Warehouse receipt: Get loans against stored produce, 4) Cold storage: Vegetables 0-4°C, Fruits 2-8°C, 5) Fumigation: Aluminum phosphide for large storage, 6) FIFO method: First in, first out, 7) Govt warehouse: ₹1-2/quintal/month. Proper storage increases income by 15-20%!';
+      } else if (q.includes('tractor') || q.includes('equipment') || q.includes('machinery') || q.includes('tool')) {
+        return 'Farm equipment: 1) Tractor: 30-40HP for small farms, 50HP+ for large, 2) Rental: ₹800-1500/day cheaper than buying, 3) Subsidy: 40-50% on equipment through state schemes, 4) Essential tools: Rotavator, Seed drill, Sprayer, Harvester, 5) Custom hiring centers: Govt-subsidized rentals, 6) Maintenance: Service every 250 hours, 7) Drones for spraying: ₹2000/acre, covers 10x faster.';
+      } else if (q.includes('profit') || q.includes('income') || q.includes('earning') || q.includes('cost')) {
+        return 'Profit calculation: 1) Rice: Cost ₹25,000/acre, Income ₹45,000, Profit ₹20,000, 2) Wheat: Cost ₹20,000, Income ₹35,000, Profit ₹15,000, 3) Vegetables: 3-4x profit but higher risk, 4) Reduce cost: Bulk seed purchase, own equipment, organic inputs, 5) Increase income: Value addition, direct selling, off-season crops, 6) Diversify: Crop+Dairy+Poultry for stable income, 7) Record keeping essential for profit tracking.';
+      } else if (q.includes('training') || q.includes('learn') || q.includes('course') || q.includes('education')) {
+        return 'Training resources: 1) KVK (Krishi Vigyan Kendra): Free training programs, 2) ATMA: Extension services in every district, 3) Online: ICAR e-courses, YouTube channels, 4) Farmer Field Schools: Hands-on learning, 5) Exposure visits: Learn from progressive farmers, 6) Mobile apps: Kisan Suvidha, mKisan, Agri App, 7) Helpline: 1800-180-1551 (Kisan Call Center). Continuous learning increases productivity!';
+      } else {
+        return 'I can help with: Pest control, Soil & fertilizers, Irrigation, Crop selection, Market prices, Disease management, Weather, Organic farming, Government schemes, Storage, Equipment, Profit calculation, Training. Please ask a specific question about any farming topic!';
+      }
+    }
+  </script>
+</body>
+</html>
