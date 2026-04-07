@@ -81,13 +81,13 @@ export default function Navbar() {
 }
 
 const styles = {
-  nav: { background: '#1f4f2b', color: 'white', padding: '1rem 0', position: 'sticky', top: 0, zIndex: 10, boxShadow: '0 4px 12px rgba(0,40,0,0.1)' },
-  container: { maxWidth: 1280, margin: '0 auto', padding: '0 2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: '1rem' },
-  logo: { color: 'white', textDecoration: 'none', fontSize: '1.5rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem' },
-  links: { display: 'flex', gap: '1.5rem', alignItems: 'center', flexWrap: 'wrap' },
-  link: { color: '#f0f7e6', textDecoration: 'none', fontWeight: 500 },
-  highlight: { background: '#e9b741', color: '#1f4f2b', padding: '0.4rem 1rem', borderRadius: 40, fontWeight: 700 },
-  btn: { background: '#e9b741', color: '#1f4f2b', padding: '0.5rem 1.2rem', borderRadius: 40, fontWeight: 600, textDecoration: 'none', border: 'none', cursor: 'pointer', fontSize: '0.95rem' },
+  nav: { background: '#1f4f2b', color: 'white', padding: '0.8rem 0', position: 'sticky', top: 0, zIndex: 10, boxShadow: '0 4px 12px rgba(0,40,0,0.1)' },
+  container: { maxWidth: 1280, margin: '0 auto', padding: '0 2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '1rem' },
+  logo: { color: 'white', textDecoration: 'none', fontSize: '1.3rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 },
+  links: { display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'nowrap', overflowX: 'auto' },
+  link: { color: '#f0f7e6', textDecoration: 'none', fontWeight: 500, fontSize: '0.9rem', whiteSpace: 'nowrap' },
+  highlight: { background: '#e9b741', color: '#1f4f2b', padding: '0.35rem 0.9rem', borderRadius: 40, fontWeight: 700, fontSize: '0.9rem', whiteSpace: 'nowrap' },
+  btn: { background: '#e9b741', color: '#1f4f2b', padding: '0.45rem 1rem', borderRadius: 40, fontWeight: 600, textDecoration: 'none', border: 'none', cursor: 'pointer', fontSize: '0.9rem', whiteSpace: 'nowrap' },
   btnOutline: { background: 'transparent', border: '2px solid #f5edda', color: '#f5edda' },
-  userName: { color: '#f5edda', fontWeight: 500, fontSize: '0.9rem' }
+  userName: { color: '#f5edda', fontWeight: 500, fontSize: '0.85rem', whiteSpace: 'nowrap' }
 };
