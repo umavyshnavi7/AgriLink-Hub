@@ -80,11 +80,13 @@ export default function AdminPortal() {
     setCancelModal({ open: false, index: null, reason: '' });
   };
 
-  // Sort: Pending first, then Confirmed, then Cancelled
-  const sortedBookings = [...bookings].sort((a, b) => {
-    const order = { Pending: 0, Confirmed: 1, Cancelled: 2 };
-    return (order[a.status] ?? 3) - (order[b.status] ?? 3);
-  });
+  // Sort: Pending first, then Confirmed, then Cancelled — keep original index
+  const sortedBookings = bookings
+    .map((b, i) => ({ ...b, _origIndex: i }))
+    .sort((a, b) => {
+      const order = { Pending: 0, Confirmed: 1, Cancelled: 2 };
+      return (order[a.status] ?? 3) - (order[b.status] ?? 3);
+    });
 
   const pendingCount = bookings.filter(b => b.status === 'Pending').length;
 
@@ -207,11 +209,11 @@ export default function AdminPortal() {
 
           {sortedBookings.length === 0 ? (
             <p style={{ color: '#888', textAlign: 'center', padding: '2rem' }}>No bookings yet.</p>
-          ) : sortedBookings.map((b, i) => {
-            const realIndex = bookings.indexOf(b);
+          ) : sortedBookings.map((b) => {
+            const realIndex = b._origIndex;
             const isPending = b.status === 'Pending';
             return (
-              <div key={i} style={{ background: isPending ? '#fffbf0' : '#f9f7eb', padding: '1.5rem', borderRadius: 15, marginBottom: '1rem', border: isPending ? '2px solid #e9b741' : '2px solid transparent', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
+              <div key={realIndex} style={{ background: isPending ? '#fffbf0' : '#f9f7eb', padding: '1.5rem', borderRadius: 15, marginBottom: '1rem', border: isPending ? '2px solid #e9b741' : '2px solid transparent', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem' }}>
                 <div style={{ flex: 1 }}>
                   {isPending && <div style={{ background: '#e9b741', color: '#1f4f2b', fontSize: '0.75rem', fontWeight: 700, padding: '0.2rem 0.7rem', borderRadius: 20, display: 'inline-block', marginBottom: '0.5rem' }}>⏳ ACTION REQUIRED</div>}
                   <h3 style={{ color: '#1f4f2b', marginBottom: '0.5rem' }}>🚜 {b.toolName}</h3>
