@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { showToast } from '../components/Toast';
 
+
 const equipment = [
   { icon: '🚜', name: 'Tractors',           price: '₹800-1800/day',  desc: 'Heavy-duty tractors for plowing and tilling' },
   { icon: '🌱', name: 'Tillers',            price: '₹400-600/day',   desc: 'Soil preparation and seedbed making' },
@@ -19,11 +20,24 @@ export default function FarmerDashboard() {
   const [modal, setModal] = useState({ open: false, tool: null });
   const [form, setForm] = useState(emptyForm);
   const [myBookings, setMyBookings] = useState(() => JSON.parse(localStorage.getItem('equipmentBookings') || '[]').filter(b => b.farmerName === user.name));
+  const [expertModal, setExpertModal] = useState(false);
   const [question, setQuestion] = useState('');
   const [myQuestions, setMyQuestions] = useState(() => JSON.parse(localStorage.getItem('farmerQuestions') || '[]').filter(q => q.farmer === user.name));
 
   const openModal = (tool) => { setModal({ open: true, tool }); setForm(emptyForm); };
   const closeModal = () => setModal({ open: false, tool: null });
+
+  const handleAskQuestion = (e) => {
+    e.preventDefault();
+    if (!question.trim()) return;
+    const q = { farmer: user.name, question: question.trim(), time: new Date().toLocaleString(), answered: false };
+    const all = JSON.parse(localStorage.getItem('farmerQuestions') || '[]');
+    all.unshift(q);
+    localStorage.setItem('farmerQuestions', JSON.stringify(all));
+    setMyQuestions(all.filter(q => q.farmer === user.name));
+    setQuestion('');
+    showToast('✅ Question sent to experts!', 'success');
+  };
 
   const handleBook = (e) => {
     e.preventDefault();
@@ -47,18 +61,6 @@ export default function FarmerDashboard() {
     setMyBookings(all.filter(b => b.farmerName === user.name));
     showToast(`✅ Booking request sent for ${modal.tool.name}!`, 'success');
     closeModal();
-  };
-
-  const handleAskQuestion = (e) => {
-    e.preventDefault();
-    if (!question.trim()) return;
-    const q = { farmer: user.name, question: question.trim(), time: new Date().toLocaleString(), answered: false };
-    const all = JSON.parse(localStorage.getItem('farmerQuestions') || '[]');
-    all.unshift(q);
-    localStorage.setItem('farmerQuestions', JSON.stringify(all));
-    setMyQuestions(all.filter(q => q.farmer === user.name));
-    setQuestion('');
-    showToast('✅ Question sent to experts!', 'success');
   };
 
   return (
@@ -106,60 +108,65 @@ export default function FarmerDashboard() {
 
       {/* Quick Links */}
       <div style={{ display: 'flex', gap: '1rem', marginBottom: '2rem', flexWrap: 'wrap' }}>
-        <Link to="/ai-expert" style={quickBtn}>🤖 Ask AI Expert</Link>
+        <button onClick={() => setExpertModal(v => !v)} style={{ ...quickBtn, background: expertModal ? '#1a3a5c' : '#e4f2da', color: expertModal ? 'white' : '#1f4f2b' }}>👨🔬 Ask an Expert</button>
         <Link to="/marketplace" style={quickBtn}>🛒 Marketplace</Link>
         <Link to="/resources" style={quickBtn}>📚 Resources</Link>
       </div>
 
-      {/* Equipment Grid */}
-      <h2 style={{ color: '#1f4f2b', marginBottom: '1.5rem' }}>🛠️ Available Rental Equipment</h2>
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem', marginBottom: '3rem' }}>
-        {equipment.map(eq => (
-          <div key={eq.name} style={{ background: 'white', padding: '2rem', borderRadius: 20, boxShadow: '0 5px 15px rgba(0,0,0,0.08)' }}>
-            <div style={{ fontSize: '2.5rem', marginBottom: '0.8rem' }}>{eq.icon}</div>
-            <h3 style={{ color: '#1f4f2b', marginBottom: '0.5rem' }}>{eq.name}</h3>
-            <p style={{ color: '#666', marginBottom: '0.8rem' }}>{eq.desc}</p>
-            <div style={{ background: '#f9f7eb', padding: '0.8rem', borderRadius: 10, marginBottom: '1rem', fontWeight: 600, color: '#1f4f2b' }}>{eq.price}</div>
-            <button onClick={() => openModal(eq)} style={{ width: '100%', background: '#e9b741', color: '#1f4f2b', border: 'none', padding: '0.8rem', borderRadius: 12, fontWeight: 600, cursor: 'pointer' }}>
-              Book Now
-            </button>
-          </div>
-        ))}
-      </div>
-
       {/* Ask Expert Section */}
-      <div style={{ background: 'white', padding: '2rem', borderRadius: 20, marginBottom: '2rem', boxShadow: '0 5px 15px rgba(0,0,0,0.08)' }}>
-        <h2 style={{ color: '#1f4f2b', marginBottom: '0.5rem' }}>👨🔬 Ask an Agricultural Expert</h2>
-        <p style={{ color: '#6a7e6a', marginBottom: '1.2rem', fontSize: '0.9rem' }}>Your question will be answered by a verified expert within 24 hours</p>
-        <form onSubmit={handleAskQuestion} style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-          <input
-            style={{ flex: 1, minWidth: 200, padding: '0.8rem', border: '2px solid #deecce', borderRadius: 12, fontSize: '1rem', boxSizing: 'border-box' }}
-            placeholder="e.g. What fertilizer is best for sandy soil wheat?"
-            value={question}
-            onChange={e => setQuestion(e.target.value)}
-          />
-          <button type="submit" style={{ background: '#1f4f2b', color: 'white', border: 'none', padding: '0.8rem 1.8rem', borderRadius: 12, fontWeight: 600, cursor: 'pointer', whiteSpace: 'nowrap' }}>
-            📨 Send Question
-          </button>
-        </form>
-
-        {/* My Questions */}
-        {myQuestions.length > 0 && (
-          <div style={{ marginTop: '1.5rem' }}>
-            <h4 style={{ color: '#1f4f2b', marginBottom: '1rem' }}>My Questions</h4>
-            {myQuestions.map((q, i) => (
-              <div key={i} style={{ background: '#f9f7eb', padding: '1rem', borderRadius: 12, marginBottom: '0.8rem', borderLeft: `4px solid ${q.answered ? '#2b7a2b' : '#e9b741'}` }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.3rem' }}>
-                  <p style={{ margin: 0, color: '#364a36', fontWeight: 500 }}>{q.question}</p>
-                  <span style={{ background: q.answered ? '#2b7a2b' : '#e9b741', color: q.answered ? 'white' : '#1f4f2b', padding: '0.2rem 0.8rem', borderRadius: 20, fontSize: '0.8rem', fontWeight: 600, whiteSpace: 'nowrap' }}>
-                    {q.answered ? '✅ Answered' : '⏳ Pending'}
-                  </span>
+      {expertModal && (
+        <div style={{ background: 'white', borderRadius: 20, padding: '2rem', marginBottom: '2rem', boxShadow: '0 5px 15px rgba(0,0,0,0.08)', borderTop: '4px solid #1a3a5c' }}>
+          <h2 style={{ color: '#1a3a5c', marginBottom: '0.4rem' }}>👨🔬 Ask an Agricultural Expert</h2>
+          <p style={{ color: '#6a7e6a', marginBottom: '1.2rem', fontSize: '0.9rem' }}>Get answers from verified experts within 24 hours</p>
+          <form onSubmit={handleAskQuestion}>
+            <textarea
+              style={{ width: '100%', padding: '1rem', border: '2px solid #deecce', borderRadius: 12, fontSize: '1rem', boxSizing: 'border-box', resize: 'vertical', marginBottom: '1rem', minHeight: 120 }}
+              placeholder="e.g. What fertilizer is best for sandy soil wheat?"
+              value={question}
+              onChange={e => setQuestion(e.target.value)}
+              required
+            />
+            <button type="submit" style={{ background: '#1a3a5c', color: 'white', border: 'none', padding: '0.9rem 2rem', borderRadius: 12, fontWeight: 600, cursor: 'pointer', fontSize: '1rem' }}>
+              📨 Send to Expert
+            </button>
+          </form>
+          {myQuestions.length > 0 && (
+            <div style={{ marginTop: '1.5rem' }}>
+              <h4 style={{ color: '#1f4f2b', marginBottom: '1rem' }}>My Questions ({myQuestions.length})</h4>
+              {myQuestions.map((q, i) => (
+                <div key={i} style={{ background: q.answered ? '#f0fff4' : '#fffbf0', padding: '1rem', borderRadius: 12, marginBottom: '0.8rem', borderLeft: `4px solid ${q.answered ? '#2b7a2b' : '#e9b741'}` }}>
+                  <p style={{ margin: '0 0 0.5rem', color: '#364a36', lineHeight: 1.6 }}>{q.question}</p>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                    <span style={{ color: '#888', fontSize: '0.8rem' }}>{q.time}</span>
+                    <span style={{ background: q.answered ? '#2b7a2b' : '#e9b741', color: q.answered ? 'white' : '#1f4f2b', padding: '0.2rem 0.7rem', borderRadius: 20, fontSize: '0.8rem', fontWeight: 600 }}>
+                      {q.answered ? '✅ Answered' : '⏳ Pending'}
+                    </span>
+                  </div>
                 </div>
-                <span style={{ color: '#888', fontSize: '0.8rem' }}>{q.time}</span>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Equipment Grid */}
+      <div style={{ marginBottom: '3rem' }}>
+        <div>
+          <h2 style={{ color: '#1f4f2b', marginBottom: '1.5rem' }}>🛠️ Available Rental Equipment</h2>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.5rem' }}>
+            {equipment.map(eq => (
+              <div key={eq.name} style={{ background: 'white', padding: '1.5rem', borderRadius: 20, boxShadow: '0 5px 15px rgba(0,0,0,0.08)' }}>
+                <div style={{ fontSize: '2.5rem', marginBottom: '0.8rem' }}>{eq.icon}</div>
+                <h3 style={{ color: '#1f4f2b', marginBottom: '0.5rem' }}>{eq.name}</h3>
+                <p style={{ color: '#666', marginBottom: '0.8rem', fontSize: '0.9rem' }}>{eq.desc}</p>
+                <div style={{ background: '#f9f7eb', padding: '0.6rem', borderRadius: 10, marginBottom: '1rem', fontWeight: 600, color: '#1f4f2b', fontSize: '0.9rem' }}>{eq.price}</div>
+                <button onClick={() => openModal(eq)} style={{ width: '100%', background: '#e9b741', color: '#1f4f2b', border: 'none', padding: '0.7rem', borderRadius: 12, fontWeight: 600, cursor: 'pointer' }}>
+                  Book Now
+                </button>
               </div>
             ))}
           </div>
-        )}
+        </div>
       </div>
 
       {/* My Bookings */}
@@ -191,6 +198,6 @@ export default function FarmerDashboard() {
   );
 }
 
-const quickBtn = { background: '#e4f2da', color: '#1f4f2b', padding: '0.7rem 1.5rem', borderRadius: 40, textDecoration: 'none', fontWeight: 600 };
+const quickBtn = { background: '#e4f2da', color: '#1f4f2b', padding: '0.7rem 1.5rem', borderRadius: 40, textDecoration: 'none', fontWeight: 600, border: 'none', cursor: 'pointer', fontSize: '1rem' };
 const lbl = { display: 'block', marginBottom: '0.4rem', fontWeight: 500, color: '#2e3b2e', fontSize: '0.9rem' };
 const inp = { width: '100%', padding: '0.8rem', border: '2px solid #deecce', borderRadius: 12, fontSize: '1rem', boxSizing: 'border-box' };

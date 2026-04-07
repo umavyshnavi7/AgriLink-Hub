@@ -27,11 +27,12 @@ export default function Navbar() {
             </>
           ) : user.isLoggedIn && user.role === 'farmer' ? (
             <>
-              <Link to="/resources" style={styles.link}>Resources</Link>
-              <Link to="/marketplace" style={styles.link}>Marketplace</Link>
-              <Link to="/ai-expert" style={styles.link}>AI Expert</Link>
-              <Link to="/initiatives" style={styles.link}>Initiatives</Link>
+              <Link to="/resources" style={{ ...styles.link, ...styles.highlight }}>Resources</Link>
+              <Link to="/marketplace" style={{ ...styles.link, ...styles.highlight }}>Marketplace</Link>
+              <Link to="/ai-expert" style={{ ...styles.link, ...styles.highlight }}>AI Expert</Link>
+              <Link to="/initiatives" style={{ ...styles.link, ...styles.highlight }}>Initiatives</Link>
               <Link to="/farmer" style={{ ...styles.link, ...styles.highlight }}>🚜 Rental Tools</Link>
+              <Link to="/ask-expert" style={{ ...styles.link, ...styles.highlight }}>Ask Expert</Link>
               <span style={styles.userName}>👤 {user.name}</span>
               <button onClick={handleLogout} style={styles.btn}>Logout</button>
             </>
@@ -86,7 +87,7 @@ const styles = {
   logo: { color: 'white', textDecoration: 'none', fontSize: '1.3rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem', flexShrink: 0 },
   links: { display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'nowrap', overflowX: 'auto' },
   link: { color: '#f0f7e6', textDecoration: 'none', fontWeight: 500, fontSize: '0.9rem', whiteSpace: 'nowrap' },
-  highlight: { background: '#e9b741', color: '#1f4f2b', padding: '0.35rem 0.9rem', borderRadius: 40, fontWeight: 700, fontSize: '0.9rem', whiteSpace: 'nowrap' },
+  highlight: { background: '#4CAF50', color: 'white', padding: '0.35rem 0.9rem', borderRadius: 40, fontWeight: 700, fontSize: '0.9rem', whiteSpace: 'nowrap' },
   btn: { background: '#e9b741', color: '#1f4f2b', padding: '0.45rem 1rem', borderRadius: 40, fontWeight: 600, textDecoration: 'none', border: 'none', cursor: 'pointer', fontSize: '0.9rem', whiteSpace: 'nowrap' },
   btnOutline: { background: 'transparent', border: '2px solid #f5edda', color: '#f5edda' },
   userName: { color: '#f5edda', fontWeight: 500, fontSize: '0.85rem', whiteSpace: 'nowrap' }

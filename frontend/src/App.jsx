@@ -8,6 +8,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Signup from './pages/Signup';
 import AiExpert from './pages/AiExpert';
+import AskExpert from './pages/AskExpert';
 import FarmerDashboard from './pages/FarmerDashboard';
 import Resources from './pages/Resources';
 import ResourceDetail from './pages/ResourceDetail';
@@ -53,6 +54,9 @@ export default function App() {
           } />
           <Route path="/ai-expert" element={
             <ProtectedRoute><AiExpert /></ProtectedRoute>
+          } />
+          <Route path="/ask-expert" element={
+            <ProtectedRoute allowedRoles={['farmer']}><AskExpert /></ProtectedRoute>
           } />
           <Route path="/farmer" element={
             <ProtectedRoute allowedRoles={['farmer']}><FarmerDashboard /></ProtectedRoute>
