@@ -16,6 +16,7 @@ export default function ExpertDashboard() {
     { farmer: 'Priya Sharma', question: 'How to control aphids organically in cotton?', time: '5 hours ago' },
     { farmer: 'Suresh Patel', question: 'When should I start drip irrigation for tomatoes?', time: '1 day ago' },
   ]);
+  const [answered, setAnswered] = useState([]);
   const [answer, setAnswer] = useState({ open: false, index: null, text: '' });
 
   const handlePost = (e) => {
@@ -54,6 +55,7 @@ export default function ExpertDashboard() {
   const handleAnswer = (i) => {
     if (!answer.text.trim()) { showToast('Please write an answer.', 'error'); return; }
     showToast(`Answer sent to ${questions[i].farmer}!`, 'success');
+    setAnswered(prev => [...prev, i]);
     setAnswer({ open: false, index: null, text: '' });
   };
 
@@ -107,22 +109,27 @@ export default function ExpertDashboard() {
       <div style={{ background: 'white', padding: '2rem', borderRadius: 20, marginBottom: '2rem', boxShadow: '0 5px 15px rgba(0,0,0,0.08)' }}>
         <h2 style={{ color: '#1a3a5c', marginBottom: '1.5rem' }}>❓ Farmer Questions</h2>
         {questions.map((q, i) => (
-          <div key={i} style={{ background: '#f0f7ff', padding: '1.2rem', borderRadius: 12, marginBottom: '1rem', borderLeft: '4px solid #2b6cb0' }}>
+          <div key={i} style={{ background: '#f0f7ff', padding: '1.2rem', borderRadius: 12, marginBottom: '1rem', borderLeft: `4px solid ${answered.includes(i) ? '#2b7a2b' : '#2b6cb0'}` }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', flexWrap: 'wrap', gap: '0.5rem', marginBottom: '0.5rem' }}>
               <strong style={{ color: '#1a3a5c' }}>👤 {q.farmer}</strong>
-              <span style={{ color: '#888', fontSize: '0.85rem' }}>{q.time}</span>
+              <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                <span style={{ color: '#888', fontSize: '0.85rem' }}>{q.time}</span>
+                {answered.includes(i) && <span style={{ background: '#2b7a2b', color: 'white', padding: '0.2rem 0.7rem', borderRadius: 20, fontSize: '0.78rem', fontWeight: 600 }}>✅ Answered</span>}
+              </div>
             </div>
             <p style={{ color: '#364a36', margin: '0 0 0.8rem' }}>{q.question}</p>
-            {answer.open && answer.index === i ? (
-              <div>
-                <textarea style={{ ...inp, width: '100%', boxSizing: 'border-box', resize: 'vertical', marginBottom: '0.5rem' }} rows={3} placeholder="Write your answer..." value={answer.text} onChange={e => setAnswer(a => ({ ...a, text: e.target.value }))} />
-                <div style={{ display: 'flex', gap: '0.5rem' }}>
-                  <button onClick={() => handleAnswer(i)} style={{ background: '#2b7a2b', color: 'white', border: 'none', padding: '0.5rem 1.2rem', borderRadius: 8, cursor: 'pointer', fontWeight: 600 }}>Send Answer</button>
-                  <button onClick={() => setAnswer({ open: false, index: null, text: '' })} style={{ background: '#eee', color: '#333', border: 'none', padding: '0.5rem 1.2rem', borderRadius: 8, cursor: 'pointer' }}>Cancel</button>
+            {!answered.includes(i) && (
+              answer.open && answer.index === i ? (
+                <div>
+                  <textarea style={{ ...inp, width: '100%', boxSizing: 'border-box', resize: 'vertical', marginBottom: '0.5rem' }} rows={3} placeholder="Write your answer..." value={answer.text} onChange={e => setAnswer(a => ({ ...a, text: e.target.value }))} />
+                  <div style={{ display: 'flex', gap: '0.5rem' }}>
+                    <button onClick={() => handleAnswer(i)} style={{ background: '#2b7a2b', color: 'white', border: 'none', padding: '0.5rem 1.2rem', borderRadius: 8, cursor: 'pointer', fontWeight: 600 }}>Send Answer</button>
+                    <button onClick={() => setAnswer({ open: false, index: null, text: '' })} style={{ background: '#eee', color: '#333', border: 'none', padding: '0.5rem 1.2rem', borderRadius: 8, cursor: 'pointer' }}>Cancel</button>
+                  </div>
                 </div>
-              </div>
-            ) : (
-              <button onClick={() => setAnswer({ open: true, index: i, text: '' })} style={{ background: '#2b6cb0', color: 'white', border: 'none', padding: '0.5rem 1.2rem', borderRadius: 8, cursor: 'pointer', fontWeight: 600, fontSize: '0.85rem' }}>💬 Answer</button>
+              ) : (
+                <button onClick={() => setAnswer({ open: true, index: i, text: '' })} style={{ background: '#2b6cb0', color: 'white', border: 'none', padding: '0.5rem 1.2rem', borderRadius: 8, cursor: 'pointer', fontWeight: 600, fontSize: '0.85rem' }}>💬 Answer</button>
+              )
             )}
           </div>
         ))}
