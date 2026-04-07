@@ -30,6 +30,9 @@ export default function App() {
           <Route path="/admin" element={
             <ProtectedRoute allowedRoles={['admin']}><AdminPortal /></ProtectedRoute>
           } />
+          <Route path="/admin/bookings" element={
+            <ProtectedRoute allowedRoles={['admin']}><AdminPortal /></ProtectedRoute>
+          } />
           <Route path="/initiatives" element={
             <ProtectedRoute><Initiatives /></ProtectedRoute>
           } />

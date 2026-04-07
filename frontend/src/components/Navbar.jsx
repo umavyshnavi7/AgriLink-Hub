@@ -17,20 +17,31 @@ export default function Navbar() {
           <span>🌱</span> AgriLink Hub
         </Link>
         <div style={styles.links}>
-          <Link to="/" style={styles.link}>Home</Link>
-          <Link to="/resources" style={styles.link}>Resources</Link>
-          <Link to="/marketplace" style={styles.link}>Marketplace</Link>
-          <Link to="/ai-expert" style={styles.link}>AI Expert</Link>
-          <Link to="/initiatives" style={styles.link}>Initiatives</Link>
-          {user.isLoggedIn ? (
+          {user.isLoggedIn && user.role === 'admin' ? (
             <>
+              <Link to="/admin" style={styles.link}>🛠️ Manage Tools</Link>
+              <Link to="/admin/bookings" style={styles.link}>📋 Orders & Bookings</Link>
               <span style={styles.userName}>👤 {user.name}</span>
               <button onClick={handleLogout} style={styles.btn}>Logout</button>
             </>
           ) : (
             <>
-              <Link to="/login" style={{...styles.btn, ...styles.btnOutline}}>Login</Link>
-              <Link to="/signup" style={styles.btn}>Join</Link>
+              <Link to="/" style={styles.link}>Home</Link>
+              <Link to="/resources" style={styles.link}>Resources</Link>
+              <Link to="/marketplace" style={styles.link}>Marketplace</Link>
+              <Link to="/ai-expert" style={styles.link}>AI Expert</Link>
+              <Link to="/initiatives" style={styles.link}>Initiatives</Link>
+              {user.isLoggedIn ? (
+                <>
+                  <span style={styles.userName}>👤 {user.name}</span>
+                  <button onClick={handleLogout} style={styles.btn}>Logout</button>
+                </>
+              ) : (
+                <>
+                  <Link to="/login" style={{...styles.btn, ...styles.btnOutline}}>Login</Link>
+                  <Link to="/signup" style={styles.btn}>Join</Link>
+                </>
+              )}
             </>
           )}
         </div>
