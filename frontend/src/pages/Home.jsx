@@ -75,7 +75,12 @@ export default function Home() {
               </Link>
             </div>
           </div>
-          <div style={{ background: "url('https://images.unsplash.com/photo-1523348837708-15d4a6cf8d2e?w=800&q=80') center/cover", borderRadius: 30, minHeight: 300, boxShadow: '0 20px 30px -10px rgba(60,90,40,0.3)' }} />
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gridTemplateRows: '1fr 1fr', gap: '1rem', minHeight: 340 }}>
+            <div style={{ background: "url('https://images.unsplash.com/photo-1500937386664-56d1dfef3854?w=400&q=80') center/cover", borderRadius: 20 }} />
+            <div style={{ background: "url('https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=400&q=80') center/cover", borderRadius: 20 }} />
+            <div style={{ background: "url('https://images.unsplash.com/photo-1574943320219-553eb213f72d?w=400&q=80') center/cover", borderRadius: 20 }} />
+            <div style={{ background: "url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&q=80') center/cover", borderRadius: 20 }} />
+          </div>
         </div>
       </section>
 

@@ -3,7 +3,7 @@
 CREATE DATABASE IF NOT EXISTS agrilink;
 USE agrilink;
 
--- ─── Users ────────────────────────────────────────────────────────────────────
+
 CREATE TABLE IF NOT EXISTS users (
     id         BIGINT PRIMARY KEY AUTO_INCREMENT,
     name       VARCHAR(255) NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- ─── Farming Tools ────────────────────────────────────────────────────────────
+
 CREATE TABLE IF NOT EXISTS tools (
     id          BIGINT PRIMARY KEY AUTO_INCREMENT,
     name        VARCHAR(255) NOT NULL,
